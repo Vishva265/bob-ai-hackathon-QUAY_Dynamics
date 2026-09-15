@@ -1,0 +1,20 @@
+{
+  "severe_wait_hours": 8,
+  "maximum_diversion_nm": 400,
+  "minimum_diversion_hours_saved": 4,
+  "minimum_net_benefit_usd": 1000,
+  "minimum_conservative_hours_saved": 0,
+  "time_value_usd_per_hour": 1000,
+  "carbon_value_usd_per_tonne": 50,
+  "uncertainty_cost_usd_per_hour": 100,
+  "fuel_price_usd_per_tonne": 700,
+  "reference_fuel_tonnes_per_nm": 0.05,
+  "reference_speed_knots": 18,
+  "anchorage_fuel_tonnes_per_hour": 0.15,
+  "co2_tonnes_per_fuel_tonne": 3.1,
+  "terminal_transfer_nm": 5,
+  "uncertainty_fallback_hours": 24,
+  "expiry_minutes": 60,
+  "maximum_position_age_hours": 4,
+  "search_step_minutes": 60
+}

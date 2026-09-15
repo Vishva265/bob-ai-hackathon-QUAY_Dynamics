@@ -1,0 +1,13 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py312"
+exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82", "F401", "F811"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["F401", "F811"] # pytest fixture imports are discovered by name

@@ -1,0 +1,15 @@
+FROM python:3.12-slim
+WORKDIR /workspace/backend
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+COPY requirements.txt requirements-lock.txt ./
+RUN pip install --no-cache-dir -r requirements.txt -c requirements-lock.txt
+COPY app ./app
+COPY migrations ./migrations
+COPY alembic.ini ./alembic.ini
+COPY scripts ./scripts
+COPY config ./config
+RUN useradd --create-home --uid 10001 portops && mkdir -p /workspace/artifacts && chown -R portops:portops /workspace/artifacts
+USER portops
+EXPOSE 8000
+HEALTHCHECK --interval=30s --timeout=8s --start-period=600s --retries=3 CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/ready', timeout=5)"
+CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1", "--limit-concurrency", "32"]

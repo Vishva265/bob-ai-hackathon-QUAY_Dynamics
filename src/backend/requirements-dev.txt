@@ -1,0 +1,6 @@
+-r requirements.txt
+-c requirements-lock.txt
+httpx==0.28.1
+pytest==8.4.2
+ruff==0.15.6
+PyYAML==6.0.3
