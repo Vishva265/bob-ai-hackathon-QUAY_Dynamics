@@ -1,0 +1,16 @@
+{
+  "schema_version": "quay-demo-seed-v1",
+  "synthetic": true,
+  "real_world_validated": false,
+  "source_scenario": "normal_operations",
+  "source_input_hash": "202f25eea9164a3599dc31432b1caaf5f5a8a7d5bab2317053d9e8341073825d",
+  "epoch": "2026-09-13T00:00:00+00:00",
+  "normal_run_id": "62bb6b1b-8d2a-46e8-9dbb-9aa635179206",
+  "normal_plan_id": "3765b345-0be2-48f3-a6f8-460c37b0f389",
+  "normal_plan_status": "APPROVED",
+  "storm_run_id": "4eea620b-83eb-413f-8fd9-bd0b10ae5844",
+  "storm_recommendation_run_id": "b39096d7-4131-49ce-8d33-0dddaf876c6d",
+  "model_version": "ml-v1-2f70795b7047dda6",
+  "description": "Seed 42, 60 historical days, 7 upcoming days; P01 approved normal opening and hypothetical storm preset",
+  "database_sha256": "4592fe3f97a7b66ad8ed491646c5203172608d5007ffafb8046523b6a70cdf0f"
+}

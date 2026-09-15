@@ -1,0 +1,53 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      DATABASE_URL: ${DATABASE_URL:-sqlite:///artifacts/operations.db}
+      AUTO_MIGRATE:
+      MODEL_DIRECTORY: ${MODEL_DIRECTORY:-artifacts/models}
+      EVALUATION_DIRECTORY: ${EVALUATION_DIRECTORY:-artifacts/evaluation}
+      ALERT_RULES_FILE: ${ALERT_RULES_FILE:-}
+      OPTIMISATION_POLICY_FILE: ${OPTIMISATION_POLICY_FILE:-}
+      RECOMMENDATION_POLICY_FILE: ${RECOMMENDATION_POLICY_FILE:-}
+      # Pass through an explicit flag; when unset the backend chooses by APP_ENV.
+      LIVE_DEMO_ENABLED:
+      LIVE_DEMO_DIRECTORY: ${LIVE_DEMO_DIRECTORY:-artifacts/live-demo}
+      OPERATOR_API_KEY: ${OPERATOR_API_KEY:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173}
+      EXPENSIVE_REQUESTS_PER_MINUTE: ${EXPENSIVE_REQUESTS_PER_MINUTE:-30}
+      REQUEST_BODY_LIMIT_BYTES: ${REQUEST_BODY_LIMIT_BYTES:-1048576}
+      JOB_LEASE_SECONDS: ${JOB_LEASE_SECONDS:-900}
+      READINESS_REQUIRE_MODEL:
+      READINESS_REQUIRE_DATA:
+      DEMO_SEED_ON_START: ${DEMO_SEED_ON_START:-false}
+      DEMO_TRAIN_ON_START: ${DEMO_TRAIN_ON_START:-false}
+      DEMO_DATASET_DIRECTORY: ${DEMO_DATASET_DIRECTORY:-}
+    volumes:
+      - operations_data:/workspace/artifacts
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "5173:80"
+  postgres:
+    image: postgres:18-alpine
+    profiles: [postgres]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-port_ops}
+      # Empty is harmless for SQLite's inactive profile; PostgreSQL itself rejects it.
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-}
+      POSTGRES_DB: ${POSTGRES_DB:-port_ops}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  operations_data:
+  postgres_data:

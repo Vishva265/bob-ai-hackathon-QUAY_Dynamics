@@ -1,0 +1,1869 @@
+{
+  "schema_version": "strategy-evaluation-v1",
+  "synthetic": true,
+  "real_world_validated": false,
+  "model_version": "ml-v1-2f70795b7047dda6",
+  "config": {
+    "repeats": 3,
+    "solver_seconds": 3.0,
+    "priority_rank_cutoff": 2,
+    "priority_wait_sla_hours": 4,
+    "eta_delay_hours": 6,
+    "outage_hours": 12,
+    "policy": {
+      "weights": {
+        "waiting": 30,
+        "departure_delay": 10,
+        "yard_congestion": 1,
+        "crane_overtime": 5,
+        "unused_berth_capacity": 0.1,
+        "priority_delay": 30,
+        "reassignment": 20,
+        "rerouting": 1,
+        "emissions": 5,
+        "prediction_risk": 10,
+        "deferral": 100000
+      },
+      "allow_deferral": true,
+      "allow_rerouting": false,
+      "replan_approved": false,
+      "freeze_minutes": 120,
+      "yard_safe_fraction": 0.9,
+      "yard_productivity_min_fraction": 0.6,
+      "yard_productivity_headroom_fraction": 0.05,
+      "yard_congestion_fraction": 0.75,
+      "berth_entry_buffer_minutes": 15,
+      "berth_exit_buffer_minutes": 15,
+      "alongside_clearance_m": 0.3,
+      "target_turnaround_hours": 24,
+      "regular_crane_hours_per_day": 16,
+      "transit_speed_knots": 18,
+      "waiting_cost_usd_per_hour": 1000,
+      "departure_delay_cost_usd_per_hour": 400,
+      "crane_overtime_cost_usd_per_hour": 100,
+      "deferral_cost_usd": 50000,
+      "reroute_fixed_cost_usd": 2000,
+      "reroute_cost_usd_per_nm": 5,
+      "waiting_co2_tonnes_per_hour": 0.8,
+      "sailing_co2_tonnes_per_nm": 0.02,
+      "max_candidates_per_call": 30,
+      "yard_capacity_certificates": {}
+    },
+    "recommendation_policy": {
+      "severe_wait_hours": 8,
+      "maximum_diversion_nm": 400,
+      "minimum_diversion_hours_saved": 4,
+      "minimum_net_benefit_usd": 1000,
+      "minimum_conservative_hours_saved": 0,
+      "time_value_usd_per_hour": 1000,
+      "carbon_value_usd_per_tonne": 50,
+      "uncertainty_cost_usd_per_hour": 100,
+      "fuel_price_usd_per_tonne": 700,
+      "reference_fuel_tonnes_per_nm": 0.05,
+      "reference_speed_knots": 18,
+      "anchorage_fuel_tonnes_per_hour": 0.15,
+      "co2_tonnes_per_fuel_tonne": 3.1,
+      "terminal_transfer_nm": 5,
+      "uncertainty_fallback_hours": 24,
+      "expiry_minutes": 60,
+      "maximum_position_age_hours": 4,
+      "search_step_minutes": 60
+    }
+  },
+  "rows": [
+    {
+      "average_wait_hours": 10.177083333333334,
+      "p90_wait_hours": 35.025,
+      "maximum_wait_hours": 66.5,
+      "served_vessels": 72,
+      "deferred_vessels": 8,
+      "cohort_vessels": 80,
+      "demand_average_wait_lower_bound_hours": 15.896875,
+      "total_delay_hours": 1271.75,
+      "total_departure_delay_hours": 1666.0,
+      "delay_is_lower_bound": true,
+      "berth_utilisation": 0.5334595959595959,
+      "crane_utilisation": 0.25694550742384814,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 20,
+      "priority_vessels": 32,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 2421500.0,
+      "estimated_emissions_tonnes_co2": 913.1,
+      "crane_overtime_hours": 833.5,
+      "crane_available_hours": 13066.0,
+      "crane_used_hours": 3357.25,
+      "solver_runtime_ms": 0,
+      "engine_runtime_ms": 1679,
+      "solver_status": "NOT_APPLICABLE",
+      "schedule_source": "fcfs",
+      "validation_passed": true,
+      "scenario_id": "normal_operations",
+      "scenario": "Normal Operations",
+      "strategy_id": "fcfs",
+      "strategy": "First-come-first-served",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 10.177083333333334,
+          "max": 10.177083333333334
+        },
+        "total_delay_hours": {
+          "min": 1271.75,
+          "max": 1271.75
+        },
+        "estimated_cost_usd": {
+          "min": 2421500.0,
+          "max": 2421500.0
+        },
+        "solver_runtime_ms": {
+          "min": 0,
+          "max": 0
+        },
+        "engine_runtime_ms": {
+          "min": 1591,
+          "max": 1679
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 1,
+        "changed_call_ids": [
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 69,
+        "unchanged_eligible_fraction": 0.9855072463768116
+      },
+      "replan_solver_runtime_ms": 0,
+      "replan_engine_runtime_ms": 1635,
+      "forecast_mae_hours": null,
+      "forecast_rmse_hours": null,
+      "forecast_f1": null,
+      "estimated_cost_savings_usd": 0.0,
+      "estimated_emissions_savings_tonnes_co2": 0.0,
+      "solver_objective": null,
+      "solver_best_bound": null,
+      "solver_relative_gap": null,
+      "cost_savings_075x_usd": 0.0,
+      "cost_savings_125x_usd": 0.0,
+      "emissions_savings_075x_tonnes": 0.0,
+      "emissions_savings_125x_tonnes": 0.0
+    },
+    {
+      "average_wait_hours": 9.464788732394366,
+      "p90_wait_hours": 33.0,
+      "maximum_wait_hours": 44.25,
+      "served_vessels": 71,
+      "deferred_vessels": 9,
+      "cohort_vessels": 80,
+      "demand_average_wait_lower_bound_hours": 16.5,
+      "total_delay_hours": 1320.0,
+      "total_departure_delay_hours": 1714.25,
+      "delay_is_lower_bound": true,
+      "berth_utilisation": 0.5303819444444444,
+      "crane_utilisation": 0.2553765498239706,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 20,
+      "priority_vessels": 32,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 2537050.0,
+      "estimated_emissions_tonnes_co2": 946.74,
+      "crane_overtime_hours": 813.5,
+      "crane_available_hours": 13066.0,
+      "crane_used_hours": 3336.75,
+      "solver_runtime_ms": 3045,
+      "engine_runtime_ms": 11622,
+      "solver_status": "FEASIBLE",
+      "schedule_source": "cp_sat",
+      "validation_passed": true,
+      "scenario_id": "normal_operations",
+      "scenario": "Normal Operations",
+      "strategy_id": "berth_only",
+      "strategy": "Optimised berths only",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 9.464788732394366,
+          "max": 9.464788732394366
+        },
+        "total_delay_hours": {
+          "min": 1320.0,
+          "max": 1320.0
+        },
+        "estimated_cost_usd": {
+          "min": 2537050.0,
+          "max": 2537050.0
+        },
+        "solver_runtime_ms": {
+          "min": 3044,
+          "max": 3046
+        },
+        "engine_runtime_ms": {
+          "min": 11589,
+          "max": 11803
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 1,
+        "changed_call_ids": [
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 68,
+        "unchanged_eligible_fraction": 0.9852941176470589
+      },
+      "replan_solver_runtime_ms": 3039,
+      "replan_engine_runtime_ms": 20472,
+      "forecast_mae_hours": null,
+      "forecast_rmse_hours": null,
+      "forecast_f1": null,
+      "estimated_cost_savings_usd": -115550.0,
+      "estimated_emissions_savings_tonnes_co2": -33.639999999999986,
+      "solver_objective": 2720831.3807875,
+      "solver_best_bound": 1071776.47372,
+      "solver_relative_gap": 0.6060849337125067,
+      "cost_savings_075x_usd": -86662.5,
+      "cost_savings_125x_usd": -144437.5,
+      "emissions_savings_075x_tonnes": -25.22999999999999,
+      "emissions_savings_125x_tonnes": -42.04999999999998
+    },
+    {
+      "average_wait_hours": 7.50625,
+      "p90_wait_hours": 23.575000000000006,
+      "maximum_wait_hours": 83.5,
+      "served_vessels": 80,
+      "deferred_vessels": 0,
+      "cohort_vessels": 80,
+      "demand_average_wait_lower_bound_hours": 7.50625,
+      "total_delay_hours": 600.5,
+      "total_departure_delay_hours": 670.75,
+      "delay_is_lower_bound": false,
+      "berth_utilisation": 0.4466540404040404,
+      "crane_utilisation": 0.391875861013317,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 14,
+      "priority_vessels": 32,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 968850.0,
+      "estimated_emissions_tonnes_co2": 425.0,
+      "crane_overtime_hours": 1000.5,
+      "crane_available_hours": 13066.0,
+      "crane_used_hours": 5120.25,
+      "solver_runtime_ms": 3056,
+      "engine_runtime_ms": 10235,
+      "solver_status": "FEASIBLE",
+      "schedule_source": "cp_sat",
+      "validation_passed": true,
+      "scenario_id": "normal_operations",
+      "scenario": "Normal Operations",
+      "strategy_id": "berth_crane",
+      "strategy": "Optimised berths + cranes",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 7.50625,
+          "max": 7.50625
+        },
+        "total_delay_hours": {
+          "min": 600.5,
+          "max": 600.5
+        },
+        "estimated_cost_usd": {
+          "min": 968850.0,
+          "max": 968850.0
+        },
+        "solver_runtime_ms": {
+          "min": 3048,
+          "max": 3056
+        },
+        "engine_runtime_ms": {
+          "min": 10235,
+          "max": 10359
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 2,
+        "changed_call_ids": [
+          "P01-D059-N01",
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 77,
+        "unchanged_eligible_fraction": 0.974025974025974
+      },
+      "replan_solver_runtime_ms": 3045,
+      "replan_engine_runtime_ms": 20078,
+      "forecast_mae_hours": null,
+      "forecast_rmse_hours": null,
+      "forecast_f1": null,
+      "estimated_cost_savings_usd": 1452650.0,
+      "estimated_emissions_savings_tonnes_co2": 488.1,
+      "solver_objective": 74531.16465,
+      "solver_best_bound": 6454.8295275,
+      "solver_relative_gap": 0.9133942216277979,
+      "cost_savings_075x_usd": 1089487.5,
+      "cost_savings_125x_usd": 1815812.5,
+      "emissions_savings_075x_tonnes": 366.07500000000005,
+      "emissions_savings_125x_tonnes": 610.125
+    },
+    {
+      "average_wait_hours": 7.50625,
+      "p90_wait_hours": 23.575000000000006,
+      "maximum_wait_hours": 83.5,
+      "served_vessels": 80,
+      "deferred_vessels": 0,
+      "cohort_vessels": 80,
+      "demand_average_wait_lower_bound_hours": 7.50625,
+      "total_delay_hours": 600.5,
+      "total_departure_delay_hours": 670.75,
+      "delay_is_lower_bound": false,
+      "berth_utilisation": 0.4466540404040404,
+      "crane_utilisation": 0.391875861013317,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 14,
+      "priority_vessels": 32,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 968850.0,
+      "estimated_emissions_tonnes_co2": 425.0,
+      "crane_overtime_hours": 1000.5,
+      "crane_available_hours": 13066.0,
+      "crane_used_hours": 5120.25,
+      "solver_runtime_ms": 3049,
+      "engine_runtime_ms": 10389,
+      "solver_status": "FEASIBLE",
+      "schedule_source": "cp_sat",
+      "validation_passed": true,
+      "scenario_id": "normal_operations",
+      "scenario": "Normal Operations",
+      "strategy_id": "predictive_routing",
+      "strategy": "Predictive optimisation + routing advice",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 7.50625,
+          "max": 7.50625
+        },
+        "total_delay_hours": {
+          "min": 600.5,
+          "max": 600.5
+        },
+        "estimated_cost_usd": {
+          "min": 968850.0,
+          "max": 968850.0
+        },
+        "solver_runtime_ms": {
+          "min": 2925,
+          "max": 3049
+        },
+        "engine_runtime_ms": {
+          "min": 10353,
+          "max": 10389
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 2,
+        "changed_call_ids": [
+          "P01-D059-N01",
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 77,
+        "unchanged_eligible_fraction": 0.974025974025974
+      },
+      "replan_solver_runtime_ms": 3031,
+      "replan_engine_runtime_ms": 20488,
+      "routing_advice": {
+        "vessels_evaluated": 42,
+        "actions": {
+          "KEEP_CURRENT_PLAN": 30,
+          "SLOW_STEAM_OR_DELAY_ARRIVAL": 11,
+          "ALTERNATE_TERMINAL": 1
+        },
+        "proposed_port_reroutes": 0,
+        "distant_diversions_rejected": 565,
+        "aggregate_is_executable": false,
+        "applied_recommendations": 0,
+        "operator_approval_required": true
+      },
+      "forecast_mae_hours": 7.227230524847832,
+      "forecast_rmse_hours": 10.00845873591775,
+      "forecast_f1": 0.3154121863799283,
+      "estimated_cost_savings_usd": 1452650.0,
+      "estimated_emissions_savings_tonnes_co2": 488.1,
+      "solver_objective": 79686.502485,
+      "solver_best_bound": 6691.4365075,
+      "solver_relative_gap": 0.916027980914841,
+      "cost_savings_075x_usd": 1089487.5,
+      "cost_savings_125x_usd": 1815812.5,
+      "emissions_savings_075x_tonnes": 366.07500000000005,
+      "emissions_savings_125x_tonnes": 610.125
+    },
+    {
+      "average_wait_hours": 12.807432432432432,
+      "p90_wait_hours": 40.95,
+      "maximum_wait_hours": 80.5,
+      "served_vessels": 74,
+      "deferred_vessels": 30,
+      "cohort_vessels": 104,
+      "demand_average_wait_lower_bound_hours": 32.93028846153846,
+      "total_delay_hours": 3424.75,
+      "total_departure_delay_hours": 3287.0,
+      "delay_is_lower_bound": true,
+      "berth_utilisation": 0.5421401515151515,
+      "crane_utilisation": 0.2610018368284096,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 33,
+      "priority_vessels": 44,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 6326225.0,
+      "estimated_emissions_tonnes_co2": 2013.5800000000002,
+      "crane_overtime_hours": 866.75,
+      "crane_available_hours": 13066.0,
+      "crane_used_hours": 3410.25,
+      "solver_runtime_ms": 0,
+      "engine_runtime_ms": 3350,
+      "solver_status": "NOT_APPLICABLE",
+      "schedule_source": "fcfs",
+      "validation_passed": true,
+      "scenario_id": "arrival_surge",
+      "scenario": "Arrival Surge",
+      "strategy_id": "fcfs",
+      "strategy": "First-come-first-served",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 12.807432432432432,
+          "max": 12.807432432432432
+        },
+        "total_delay_hours": {
+          "min": 3424.75,
+          "max": 3424.75
+        },
+        "estimated_cost_usd": {
+          "min": 6326225.0,
+          "max": 6326225.0
+        },
+        "solver_runtime_ms": {
+          "min": 0,
+          "max": 0
+        },
+        "engine_runtime_ms": {
+          "min": 3323,
+          "max": 3350
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 1,
+        "changed_call_ids": [
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 71,
+        "unchanged_eligible_fraction": 0.9859154929577465
+      },
+      "replan_solver_runtime_ms": 0,
+      "replan_engine_runtime_ms": 3581,
+      "forecast_mae_hours": null,
+      "forecast_rmse_hours": null,
+      "forecast_f1": null,
+      "estimated_cost_savings_usd": 0.0,
+      "estimated_emissions_savings_tonnes_co2": 0.0,
+      "solver_objective": null,
+      "solver_best_bound": null,
+      "solver_relative_gap": null,
+      "cost_savings_075x_usd": 0.0,
+      "cost_savings_125x_usd": 0.0,
+      "emissions_savings_075x_tonnes": 0.0,
+      "emissions_savings_125x_tonnes": 0.0
+    },
+    {
+      "average_wait_hours": 11.746527777777779,
+      "p90_wait_hours": 40.225,
+      "maximum_wait_hours": 71.75,
+      "served_vessels": 72,
+      "deferred_vessels": 32,
+      "cohort_vessels": 104,
+      "demand_average_wait_lower_bound_hours": 33.91105769230769,
+      "total_delay_hours": 3526.75,
+      "total_departure_delay_hours": 3380.25,
+      "delay_is_lower_bound": true,
+      "berth_utilisation": 0.5390625,
+      "crane_utilisation": 0.25958594826266645,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 33,
+      "priority_vessels": 44,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 6563025.0,
+      "estimated_emissions_tonnes_co2": 2055.86,
+      "crane_overtime_hours": 841.75,
+      "crane_available_hours": 13066.0,
+      "crane_used_hours": 3391.75,
+      "solver_runtime_ms": 3037,
+      "engine_runtime_ms": 16267,
+      "solver_status": "FEASIBLE",
+      "schedule_source": "cp_sat",
+      "validation_passed": true,
+      "scenario_id": "arrival_surge",
+      "scenario": "Arrival Surge",
+      "strategy_id": "berth_only",
+      "strategy": "Optimised berths only",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 11.746527777777779,
+          "max": 11.746527777777779
+        },
+        "total_delay_hours": {
+          "min": 3526.75,
+          "max": 3526.75
+        },
+        "estimated_cost_usd": {
+          "min": 6563025.0,
+          "max": 6563025.0
+        },
+        "solver_runtime_ms": {
+          "min": 3027,
+          "max": 3037
+        },
+        "engine_runtime_ms": {
+          "min": 16267,
+          "max": 17219
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 1,
+        "changed_call_ids": [
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 69,
+        "unchanged_eligible_fraction": 0.9855072463768116
+      },
+      "replan_solver_runtime_ms": 3031,
+      "replan_engine_runtime_ms": 26299,
+      "forecast_mae_hours": null,
+      "forecast_rmse_hours": null,
+      "forecast_f1": null,
+      "estimated_cost_savings_usd": -236800.0,
+      "estimated_emissions_savings_tonnes_co2": -42.27999999999997,
+      "solver_objective": 9566915.579375,
+      "solver_best_bound": 5916119.4862625,
+      "solver_relative_gap": 0.38160638743203,
+      "cost_savings_075x_usd": -177600.0,
+      "cost_savings_125x_usd": -296000.0,
+      "emissions_savings_075x_tonnes": -31.70999999999998,
+      "emissions_savings_125x_tonnes": -52.849999999999966
+    },
+    {
+      "average_wait_hours": 10.813253012048193,
+      "p90_wait_hours": 32.3,
+      "maximum_wait_hours": 84.75,
+      "served_vessels": 83,
+      "deferred_vessels": 21,
+      "cohort_vessels": 104,
+      "demand_average_wait_lower_bound_hours": 26.197115384615383,
+      "total_delay_hours": 2724.5,
+      "total_departure_delay_hours": 2262.75,
+      "delay_is_lower_bound": true,
+      "berth_utilisation": 0.45580808080808083,
+      "crane_utilisation": 0.3976733506811572,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 25,
+      "priority_vessels": 44,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 4785425.0,
+      "estimated_emissions_tonnes_co2": 1509.3,
+      "crane_overtime_hours": 1058.25,
+      "crane_available_hours": 13066.0,
+      "crane_used_hours": 5196.0,
+      "solver_runtime_ms": 3202,
+      "engine_runtime_ms": 14517,
+      "solver_status": "FEASIBLE",
+      "schedule_source": "cp_sat",
+      "validation_passed": true,
+      "scenario_id": "arrival_surge",
+      "scenario": "Arrival Surge",
+      "strategy_id": "berth_crane",
+      "strategy": "Optimised berths + cranes",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 10.813253012048193,
+          "max": 10.813253012048193
+        },
+        "total_delay_hours": {
+          "min": 2724.5,
+          "max": 2724.5
+        },
+        "estimated_cost_usd": {
+          "min": 4785425.0,
+          "max": 4785425.0
+        },
+        "solver_runtime_ms": {
+          "min": 3165,
+          "max": 3202
+        },
+        "engine_runtime_ms": {
+          "min": 14391,
+          "max": 15639
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 2,
+        "changed_call_ids": [
+          "P01-D059-N01",
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 80,
+        "unchanged_eligible_fraction": 0.975
+      },
+      "replan_solver_runtime_ms": 3175,
+      "replan_engine_runtime_ms": 24941,
+      "forecast_mae_hours": null,
+      "forecast_rmse_hours": null,
+      "forecast_f1": null,
+      "estimated_cost_savings_usd": 1540800.0,
+      "estimated_emissions_savings_tonnes_co2": 504.2800000000002,
+      "solver_objective": 6123805.9496575,
+      "solver_best_bound": 1954.9232,
+      "solver_relative_gap": 0.9996807666317203,
+      "cost_savings_075x_usd": 1155600.0,
+      "cost_savings_125x_usd": 1926000.0,
+      "emissions_savings_075x_tonnes": 378.21000000000015,
+      "emissions_savings_125x_tonnes": 630.3500000000003
+    },
+    {
+      "average_wait_hours": 10.813253012048193,
+      "p90_wait_hours": 32.3,
+      "maximum_wait_hours": 84.75,
+      "served_vessels": 83,
+      "deferred_vessels": 21,
+      "cohort_vessels": 104,
+      "demand_average_wait_lower_bound_hours": 26.197115384615383,
+      "total_delay_hours": 2724.5,
+      "total_departure_delay_hours": 2262.75,
+      "delay_is_lower_bound": true,
+      "berth_utilisation": 0.45580808080808083,
+      "crane_utilisation": 0.3976733506811572,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 25,
+      "priority_vessels": 44,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 4785425.0,
+      "estimated_emissions_tonnes_co2": 1509.3,
+      "crane_overtime_hours": 1058.25,
+      "crane_available_hours": 13066.0,
+      "crane_used_hours": 5196.0,
+      "solver_runtime_ms": 3169,
+      "engine_runtime_ms": 14468,
+      "solver_status": "FEASIBLE",
+      "schedule_source": "cp_sat",
+      "validation_passed": true,
+      "scenario_id": "arrival_surge",
+      "scenario": "Arrival Surge",
+      "strategy_id": "predictive_routing",
+      "strategy": "Predictive optimisation + routing advice",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 10.813253012048193,
+          "max": 10.813253012048193
+        },
+        "total_delay_hours": {
+          "min": 2724.5,
+          "max": 2724.5
+        },
+        "estimated_cost_usd": {
+          "min": 4785425.0,
+          "max": 4785425.0
+        },
+        "solver_runtime_ms": {
+          "min": 3169,
+          "max": 3286
+        },
+        "engine_runtime_ms": {
+          "min": 14468,
+          "max": 18045
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 2,
+        "changed_call_ids": [
+          "P01-D059-N01",
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 80,
+        "unchanged_eligible_fraction": 0.975
+      },
+      "replan_solver_runtime_ms": 3172,
+      "replan_engine_runtime_ms": 25826,
+      "routing_advice": {
+        "vessels_evaluated": 68,
+        "actions": {
+          "KEEP_CURRENT_PLAN": 55,
+          "SLOW_STEAM_OR_DELAY_ARRIVAL": 11,
+          "ALTERNATE_TERMINAL": 2
+        },
+        "proposed_port_reroutes": 0,
+        "distant_diversions_rejected": 955,
+        "aggregate_is_executable": false,
+        "applied_recommendations": 0,
+        "operator_approval_required": true
+      },
+      "forecast_mae_hours": 42.030213945201794,
+      "forecast_rmse_hours": 82.79373037426232,
+      "forecast_f1": 0.3397548161120841,
+      "estimated_cost_savings_usd": 1540800.0,
+      "estimated_emissions_savings_tonnes_co2": 504.2800000000002,
+      "solver_objective": 6132616.0319175,
+      "solver_best_bound": 1954.9232,
+      "solver_relative_gap": 0.9996812252406109,
+      "cost_savings_075x_usd": 1155600.0,
+      "cost_savings_125x_usd": 1926000.0,
+      "emissions_savings_075x_tonnes": 378.21000000000015,
+      "emissions_savings_125x_tonnes": 630.3500000000003
+    },
+    {
+      "average_wait_hours": 12.421641791044776,
+      "p90_wait_hours": 42.5,
+      "maximum_wait_hours": 66.5,
+      "served_vessels": 67,
+      "deferred_vessels": 13,
+      "cohort_vessels": 80,
+      "demand_average_wait_lower_bound_hours": 22.265625,
+      "total_delay_hours": 1781.25,
+      "total_departure_delay_hours": 2111.5,
+      "delay_is_lower_bound": true,
+      "berth_utilisation": 0.5287247474747475,
+      "crane_utilisation": 0.24838466056893513,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 22,
+      "priority_vessels": 32,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 3343475.0,
+      "estimated_emissions_tonnes_co2": 1197.66,
+      "crane_overtime_hours": 676.25,
+      "crane_available_hours": 11917.0,
+      "crane_used_hours": 2960.0,
+      "solver_runtime_ms": 0,
+      "engine_runtime_ms": 1824,
+      "solver_status": "NOT_APPLICABLE",
+      "schedule_source": "fcfs",
+      "validation_passed": true,
+      "scenario_id": "storm_crane_breakdown",
+      "scenario": "Storm + Crane Breakdown",
+      "strategy_id": "fcfs",
+      "strategy": "First-come-first-served",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 12.421641791044776,
+          "max": 12.421641791044776
+        },
+        "total_delay_hours": {
+          "min": 1781.25,
+          "max": 1781.25
+        },
+        "estimated_cost_usd": {
+          "min": 3343475.0,
+          "max": 3343475.0
+        },
+        "solver_runtime_ms": {
+          "min": 0,
+          "max": 0
+        },
+        "engine_runtime_ms": {
+          "min": 1822,
+          "max": 1847
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 1,
+        "changed_call_ids": [
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 64,
+        "unchanged_eligible_fraction": 0.984375
+      },
+      "replan_solver_runtime_ms": 0,
+      "replan_engine_runtime_ms": 1935,
+      "forecast_mae_hours": null,
+      "forecast_rmse_hours": null,
+      "forecast_f1": null,
+      "estimated_cost_savings_usd": 0.0,
+      "estimated_emissions_savings_tonnes_co2": 0.0,
+      "solver_objective": null,
+      "solver_best_bound": null,
+      "solver_relative_gap": null,
+      "cost_savings_075x_usd": 0.0,
+      "cost_savings_125x_usd": 0.0,
+      "emissions_savings_075x_tonnes": 0.0,
+      "emissions_savings_125x_tonnes": 0.0
+    },
+    {
+      "average_wait_hours": 11.68939393939394,
+      "p90_wait_hours": 42.0,
+      "maximum_wait_hours": 57.5,
+      "served_vessels": 66,
+      "deferred_vessels": 14,
+      "cohort_vessels": 80,
+      "demand_average_wait_lower_bound_hours": 22.86875,
+      "total_delay_hours": 1829.5,
+      "total_departure_delay_hours": 2159.75,
+      "delay_is_lower_bound": true,
+      "berth_utilisation": 0.5256470959595959,
+      "crane_utilisation": 0.2466644289670219,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 22,
+      "priority_vessels": 32,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 3459025.0,
+      "estimated_emissions_tonnes_co2": 1231.3,
+      "crane_overtime_hours": 656.25,
+      "crane_available_hours": 11917.0,
+      "crane_used_hours": 2939.5,
+      "solver_runtime_ms": 3034,
+      "engine_runtime_ms": 12048,
+      "solver_status": "FEASIBLE",
+      "schedule_source": "cp_sat",
+      "validation_passed": true,
+      "scenario_id": "storm_crane_breakdown",
+      "scenario": "Storm + Crane Breakdown",
+      "strategy_id": "berth_only",
+      "strategy": "Optimised berths only",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 11.68939393939394,
+          "max": 11.68939393939394
+        },
+        "total_delay_hours": {
+          "min": 1829.5,
+          "max": 1829.5
+        },
+        "estimated_cost_usd": {
+          "min": 3459025.0,
+          "max": 3459025.0
+        },
+        "solver_runtime_ms": {
+          "min": 3034,
+          "max": 3035
+        },
+        "engine_runtime_ms": {
+          "min": 12048,
+          "max": 12284
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 1,
+        "changed_call_ids": [
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 63,
+        "unchanged_eligible_fraction": 0.9841269841269841
+      },
+      "replan_solver_runtime_ms": 3033,
+      "replan_engine_runtime_ms": 21090,
+      "forecast_mae_hours": null,
+      "forecast_rmse_hours": null,
+      "forecast_f1": null,
+      "estimated_cost_savings_usd": -115550.0,
+      "estimated_emissions_savings_tonnes_co2": -33.63999999999987,
+      "solver_objective": 3760000.1889125,
+      "solver_best_bound": 1300230.7469925,
+      "solver_relative_gap": 0.6541939676421761,
+      "cost_savings_075x_usd": -86662.5,
+      "cost_savings_125x_usd": -144437.5,
+      "emissions_savings_075x_tonnes": -25.229999999999905,
+      "emissions_savings_125x_tonnes": -42.04999999999984
+    },
+    {
+      "average_wait_hours": 11.759615384615385,
+      "p90_wait_hours": 36.84999999999999,
+      "maximum_wait_hours": 83.5,
+      "served_vessels": 78,
+      "deferred_vessels": 2,
+      "cohort_vessels": 80,
+      "demand_average_wait_lower_bound_hours": 13.153125,
+      "total_delay_hours": 1052.25,
+      "total_departure_delay_hours": 1137.5,
+      "delay_is_lower_bound": true,
+      "berth_utilisation": 0.4416824494949495,
+      "crane_utilisation": 0.3702693630947386,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 18,
+      "priority_vessels": 32,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 1694150.0,
+      "estimated_emissions_tonnes_co2": 709.6,
+      "crane_overtime_hours": 869.0,
+      "crane_available_hours": 11917.0,
+      "crane_used_hours": 4412.5,
+      "solver_runtime_ms": 3042,
+      "engine_runtime_ms": 11006,
+      "solver_status": "FEASIBLE",
+      "schedule_source": "cp_sat",
+      "validation_passed": true,
+      "scenario_id": "storm_crane_breakdown",
+      "scenario": "Storm + Crane Breakdown",
+      "strategy_id": "berth_crane",
+      "strategy": "Optimised berths + cranes",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 11.759615384615385,
+          "max": 11.759615384615385
+        },
+        "total_delay_hours": {
+          "min": 1052.25,
+          "max": 1052.25
+        },
+        "estimated_cost_usd": {
+          "min": 1694150.0,
+          "max": 1694150.0
+        },
+        "solver_runtime_ms": {
+          "min": 3032,
+          "max": 3042
+        },
+        "engine_runtime_ms": {
+          "min": 10887,
+          "max": 11486
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 2,
+        "changed_call_ids": [
+          "P01-D059-N01",
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 75,
+        "unchanged_eligible_fraction": 0.9733333333333334
+      },
+      "replan_solver_runtime_ms": 3038,
+      "replan_engine_runtime_ms": 21697,
+      "forecast_mae_hours": null,
+      "forecast_rmse_hours": null,
+      "forecast_f1": null,
+      "estimated_cost_savings_usd": 1649325.0,
+      "estimated_emissions_savings_tonnes_co2": 488.06000000000006,
+      "solver_objective": 924145.384645,
+      "solver_best_bound": 35475.66526,
+      "solver_relative_gap": 0.961612462877118,
+      "cost_savings_075x_usd": 1236993.75,
+      "cost_savings_125x_usd": 2061656.25,
+      "emissions_savings_075x_tonnes": 366.0450000000001,
+      "emissions_savings_125x_tonnes": 610.075
+    },
+    {
+      "average_wait_hours": 11.759615384615385,
+      "p90_wait_hours": 36.84999999999999,
+      "maximum_wait_hours": 83.5,
+      "served_vessels": 78,
+      "deferred_vessels": 2,
+      "cohort_vessels": 80,
+      "demand_average_wait_lower_bound_hours": 13.153125,
+      "total_delay_hours": 1052.25,
+      "total_departure_delay_hours": 1137.5,
+      "delay_is_lower_bound": true,
+      "berth_utilisation": 0.4416824494949495,
+      "crane_utilisation": 0.3702693630947386,
+      "yard_overflow_terminal_hours": 0,
+      "yard_overflow_network_hours": 0.0,
+      "yard_safe_capacity_exceedance_terminal_hours": 0,
+      "priority_sla_violations": 18,
+      "priority_vessels": 32,
+      "number_of_reroutes": 0,
+      "estimated_cost_usd": 1694150.0,
+      "estimated_emissions_tonnes_co2": 709.6,
+      "crane_overtime_hours": 869.0,
+      "crane_available_hours": 11917.0,
+      "crane_used_hours": 4412.5,
+      "solver_runtime_ms": 3040,
+      "engine_runtime_ms": 11242,
+      "solver_status": "FEASIBLE",
+      "schedule_source": "cp_sat",
+      "validation_passed": true,
+      "scenario_id": "storm_crane_breakdown",
+      "scenario": "Storm + Crane Breakdown",
+      "strategy_id": "predictive_routing",
+      "strategy": "Predictive optimisation + routing advice",
+      "repeat_count": 3,
+      "repeat_ranges": {
+        "average_wait_hours": {
+          "min": 11.759615384615385,
+          "max": 11.759615384615385
+        },
+        "total_delay_hours": {
+          "min": 1052.25,
+          "max": 1052.25
+        },
+        "estimated_cost_usd": {
+          "min": 1694150.0,
+          "max": 1694150.0
+        },
+        "solver_runtime_ms": {
+          "min": 3006,
+          "max": 3040
+        },
+        "engine_runtime_ms": {
+          "min": 10854,
+          "max": 11242
+        }
+      },
+      "plan_stability": {
+        "changed_assignments": 2,
+        "changed_call_ids": [
+          "P01-D059-N01",
+          "P04-D060-N04"
+        ],
+        "frozen_assignments": 21,
+        "frozen_changed": 0,
+        "eligible_previous_assignments": 75,
+        "unchanged_eligible_fraction": 0.9733333333333334
+      },
+      "replan_solver_runtime_ms": 2895,
+      "replan_engine_runtime_ms": 21678,
+      "routing_advice": {
+        "vessels_evaluated": 48,
+        "actions": {
+          "KEEP_CURRENT_PLAN": 30,
+          "SLOW_STEAM_OR_DELAY_ARRIVAL": 17,
+          "ALTERNATE_TERMINAL": 1
+        },
+        "proposed_port_reroutes": 0,
+        "distant_diversions_rejected": 655,
+        "aggregate_is_executable": false,
+        "applied_recommendations": 0,
+        "operator_approval_required": true
+      },
+      "forecast_mae_hours": 14.224365151829991,
+      "forecast_rmse_hours": 23.322855654810695,
+      "forecast_f1": 0.3161512027491409,
+      "estimated_cost_savings_usd": 1649325.0,
+      "estimated_emissions_savings_tonnes_co2": 488.06000000000006,
+      "solver_objective": 932766.8274,
+      "solver_best_bound": 37970.574145,
+      "solver_relative_gap": 0.9592925337505415,
+      "cost_savings_075x_usd": 1236993.75,
+      "cost_savings_125x_usd": 2061656.25,
+      "emissions_savings_075x_tonnes": 366.0450000000001,
+      "emissions_savings_125x_tonnes": 610.075
+    }
+  ],
+  "forecast_scores": {
+    "normal_operations": {
+      "model_version": "ml-v1-2f70795b7047dda6",
+      "waiting_samples": 72,
+      "waiting_predictions": 72,
+      "waiting_missing_labels": 0,
+      "waiting": {
+        "mae": 7.227230524847832,
+        "rmse": 10.00845873591775
+      },
+      "congestion_samples": 1584,
+      "congestion": {
+        "f1": 0.3154121863799283,
+        "precision": 0.41904761904761906,
+        "recall": 0.25287356321839083,
+        "roc_auc": 0.7509671539634714,
+        "positive_rate": 0.2196969696969697,
+        "confusion_matrix": [
+          [
+            1114,
+            122
+          ],
+          [
+            260,
+            88
+          ]
+        ]
+      },
+      "runtime_ms": 14267,
+      "evaluation_scope": "Separate upcoming 72h simulator truth, observational source policy; not counterfactual optimised outcomes"
+    },
+    "arrival_surge": {
+      "model_version": "ml-v1-2f70795b7047dda6",
+      "waiting_samples": 96,
+      "waiting_predictions": 96,
+      "waiting_missing_labels": 0,
+      "waiting": {
+        "mae": 42.030213945201794,
+        "rmse": 82.79373037426232
+      },
+      "congestion_samples": 1584,
+      "congestion": {
+        "f1": 0.3397548161120841,
+        "precision": 0.5078534031413613,
+        "recall": 0.25526315789473686,
+        "roc_auc": 0.7651293932505683,
+        "positive_rate": 0.2398989898989899,
+        "confusion_matrix": [
+          [
+            1110,
+            94
+          ],
+          [
+            283,
+            97
+          ]
+        ]
+      },
+      "runtime_ms": 15257,
+      "evaluation_scope": "Separate upcoming 72h simulator truth, observational source policy; not counterfactual optimised outcomes"
+    },
+    "storm_crane_breakdown": {
+      "model_version": "ml-v1-2f70795b7047dda6",
+      "waiting_samples": 72,
+      "waiting_predictions": 72,
+      "waiting_missing_labels": 0,
+      "waiting": {
+        "mae": 14.224365151829991,
+        "rmse": 23.322855654810695
+      },
+      "congestion_samples": 1584,
+      "congestion": {
+        "f1": 0.3161512027491409,
+        "precision": 0.4380952380952381,
+        "recall": 0.24731182795698925,
+        "roc_auc": 0.7502728095390184,
+        "positive_rate": 0.23484848484848486,
+        "confusion_matrix": [
+          [
+            1094,
+            118
+          ],
+          [
+            280,
+            92
+          ]
+        ]
+      },
+      "runtime_ms": 15892,
+      "evaluation_scope": "Separate upcoming 72h simulator truth, observational source policy; not counterfactual optimised outcomes"
+    }
+  },
+  "historical_ml_evaluation": {
+    "waiting": {
+      "selected": "linear",
+      "metrics": {
+        "rolling_average": {
+          "selection": {
+            "mae": 8.236626976394778,
+            "rmse": 12.223861484630584
+          },
+          "validation": {
+            "mae": 9.971319285813063,
+            "rmse": 16.739983404697824
+          },
+          "test": {
+            "mae": 8.582507961180207,
+            "rmse": 12.750703798024801
+          }
+        },
+        "linear": {
+          "selection": {
+            "mae": 7.043907856668356,
+            "rmse": 10.052339069850985
+          },
+          "validation": {
+            "mae": 9.156512326093411,
+            "rmse": 14.535710429743048
+          },
+          "test": {
+            "mae": 8.214286014302445,
+            "rmse": 11.919006043050258
+          }
+        },
+        "hist_gradient_boosting": {
+          "selection": {
+            "mae": 7.684897906239898,
+            "rmse": 13.335752765695608
+          },
+          "validation": {
+            "mae": 8.898563872299341,
+            "rmse": 16.02791129314018
+          },
+          "test": {
+            "mae": 7.794698942060011,
+            "rmse": 12.372216345553731
+          }
+        }
+      },
+      "uncertainty": {
+        "method": "validation_residual_split_conformal",
+        "nominal_coverage": 0.9,
+        "radius_hours": 19.104261821926194,
+        "by_lead": {
+          "0": 19.681739604828984,
+          "24": 19.104261821926194,
+          "48": 22.66645332783326
+        },
+        "test_coverage": 0.9066901408450704,
+        "test_mean_width_hours": 28.00501368875343
+      },
+      "splits": {
+        "train": {
+          "rows": 2415,
+          "origin_start": "2026-07-22T00:00:00+00:00",
+          "origin_end": "2026-08-25T00:00:00+00:00",
+          "label_known_end": "2026-08-25T23:00:00+00:00",
+          "unique_targets": 829
+        },
+        "validation": {
+          "rows": 468,
+          "origin_start": "2026-08-26T00:00:00+00:00",
+          "origin_end": "2026-09-02T00:00:00+00:00",
+          "label_known_end": "2026-09-02T23:00:00+00:00",
+          "unique_targets": 180
+        },
+        "test": {
+          "rows": 568,
+          "origin_start": "2026-09-03T00:00:00+00:00",
+          "origin_end": "2026-09-10T00:00:00+00:00",
+          "label_known_end": "2026-09-12T19:00:00+00:00",
+          "unique_targets": 232
+        }
+      },
+      "validation_selection_end": "2026-08-29T00:00:00+00:00",
+      "calibration_origin_start": "2026-08-30T00:00:00+00:00",
+      "calibration_rows": 181
+    },
+    "congestion": {
+      "selected": "logistic",
+      "metrics": {
+        "rolling_average": {
+          "selection": {
+            "precision": 0.6953352769679301,
+            "recall": 0.5536854323853744,
+            "f1": 0.6164781906300485,
+            "roc_auc": 0.8207986525240983,
+            "confusion_matrix": [
+              [
+                2545,
+                418
+              ],
+              [
+                769,
+                954
+              ]
+            ],
+            "brier_score": 0.15787984127709984,
+            "positive_rate": 0.36769099445155784,
+            "level_macro_f1": 0.46000044552439334,
+            "level_confusion_matrix": [
+              [
+                1883,
+                0,
+                307,
+                0
+              ],
+              [
+                585,
+                0,
+                188,
+                0
+              ],
+              [
+                585,
+                0,
+                685,
+                225
+              ],
+              [
+                0,
+                0,
+                27,
+                201
+              ]
+            ]
+          },
+          "validation": {
+            "precision": 0.6300031515915537,
+            "recall": 0.5451322607035725,
+            "f1": 0.5845029239766082,
+            "roc_auc": 0.7895405157840234,
+            "confusion_matrix": [
+              [
+                6181,
+                1174
+              ],
+              [
+                1668,
+                1999
+              ]
+            ],
+            "brier_score": 0.17226444027529358,
+            "positive_rate": 0.33269823988386865,
+            "level_macro_f1": 0.4617267404645764,
+            "level_confusion_matrix": [
+              [
+                4726,
+                52,
+                795,
+                13
+              ],
+              [
+                1225,
+                18,
+                491,
+                35
+              ],
+              [
+                1317,
+                0,
+                1342,
+                330
+              ],
+              [
+                104,
+                0,
+                91,
+                483
+              ]
+            ]
+          },
+          "test": {
+            "precision": 0.5849483204134367,
+            "recall": 0.4675961786728634,
+            "f1": 0.5197302338929545,
+            "roc_auc": 0.7625113462210383,
+            "confusion_matrix": [
+              [
+                7514,
+                1285
+              ],
+              [
+                2062,
+                1811
+              ]
+            ],
+            "brier_score": 0.18024426074091252,
+            "positive_rate": 0.3056344696969697,
+            "level_macro_f1": 0.40191737811313455,
+            "level_confusion_matrix": [
+              [
+                5542,
+                284,
+                1172,
+                36
+              ],
+              [
+                882,
+                364,
+                476,
+                43
+              ],
+              [
+                1391,
+                457,
+                1496,
+                293
+              ],
+              [
+                33,
+                119,
+                24,
+                60
+              ]
+            ]
+          }
+        },
+        "logistic": {
+          "selection": {
+            "precision": 0.8070175438596491,
+            "recall": 0.587347649448636,
+            "f1": 0.6798790728921733,
+            "roc_auc": 0.8433988234462217,
+            "confusion_matrix": [
+              [
+                2721,
+                242
+              ],
+              [
+                711,
+                1012
+              ]
+            ],
+            "brier_score": 0.14531690220444715,
+            "positive_rate": 0.36769099445155784,
+            "level_macro_f1": 0.5144860653171216,
+            "level_confusion_matrix": [
+              [
+                1965,
+                48,
+                177,
+                0
+              ],
+              [
+                567,
+                91,
+                115,
+                0
+              ],
+              [
+                532,
+                131,
+                645,
+                187
+              ],
+              [
+                0,
+                2,
+                42,
+                184
+              ]
+            ]
+          },
+          "validation": {
+            "precision": 0.7321494635590086,
+            "recall": 0.5396782110717208,
+            "f1": 0.6213500784929357,
+            "roc_auc": 0.8058547424555866,
+            "confusion_matrix": [
+              [
+                6631,
+                724
+              ],
+              [
+                1688,
+                1979
+              ]
+            ],
+            "brier_score": 0.15738344125135806,
+            "positive_rate": 0.33269823988386865,
+            "level_macro_f1": 0.5269213336640532,
+            "level_confusion_matrix": [
+              [
+                4985,
+                115,
+                476,
+                10
+              ],
+              [
+                1180,
+                156,
+                432,
+                1
+              ],
+              [
+                1234,
+                209,
+                1344,
+                202
+              ],
+              [
+                104,
+                2,
+                89,
+                483
+              ]
+            ]
+          },
+          "test": {
+            "precision": 0.704468802698145,
+            "recall": 0.4314484895429899,
+            "f1": 0.5351481184947958,
+            "roc_auc": 0.789582484008185,
+            "confusion_matrix": [
+              [
+                8098,
+                701
+              ],
+              [
+                2202,
+                1671
+              ]
+            ],
+            "brier_score": 0.16301486731093828,
+            "positive_rate": 0.3056344696969697,
+            "level_macro_f1": 0.4099658555859147,
+            "level_confusion_matrix": [
+              [
+                6308,
+                103,
+                622,
+                1
+              ],
+              [
+                1078,
+                173,
+                483,
+                31
+              ],
+              [
+                1576,
+                166,
+                1668,
+                227
+              ],
+              [
+                57,
+                17,
+                111,
+                51
+              ]
+            ]
+          }
+        },
+        "hist_gradient_boosting": {
+          "selection": {
+            "precision": 0.7793047696038804,
+            "recall": 0.559489262913523,
+            "f1": 0.6513513513513514,
+            "roc_auc": 0.8420039845265139,
+            "confusion_matrix": [
+              [
+                2690,
+                273
+              ],
+              [
+                759,
+                964
+              ]
+            ],
+            "brier_score": 0.14907588062511654,
+            "positive_rate": 0.36769099445155784,
+            "level_macro_f1": 0.4940575486405349,
+            "level_confusion_matrix": [
+              [
+                1937,
+                63,
+                190,
+                0
+              ],
+              [
+                510,
+                69,
+                194,
+                0
+              ],
+              [
+                582,
+                78,
+                612,
+                223
+              ],
+              [
+                0,
+                4,
+                27,
+                197
+              ]
+            ]
+          },
+          "validation": {
+            "precision": 0.6651907356948229,
+            "recall": 0.5325879465503136,
+            "f1": 0.5915492957746479,
+            "roc_auc": 0.8035648387690606,
+            "confusion_matrix": [
+              [
+                6372,
+                983
+              ],
+              [
+                1714,
+                1953
+              ]
+            ],
+            "brier_score": 0.16535829320190878,
+            "positive_rate": 0.33269823988386865,
+            "level_macro_f1": 0.4851479915258926,
+            "level_confusion_matrix": [
+              [
+                4704,
+                117,
+                698,
+                67
+              ],
+              [
+                1126,
+                166,
+                420,
+                57
+              ],
+              [
+                1248,
+                134,
+                1264,
+                343
+              ],
+              [
+                78,
+                11,
+                110,
+                479
+              ]
+            ]
+          },
+          "test": {
+            "precision": 0.6053827333100315,
+            "recall": 0.4471985540924348,
+            "f1": 0.5144045144045144,
+            "roc_auc": 0.7635790566886884,
+            "confusion_matrix": [
+              [
+                7670,
+                1129
+              ],
+              [
+                2141,
+                1732
+              ]
+            ],
+            "brier_score": 0.17725699647854373,
+            "positive_rate": 0.3056344696969697,
+            "level_macro_f1": 0.38459146945880485,
+            "level_confusion_matrix": [
+              [
+                5996,
+                171,
+                864,
+                3
+              ],
+              [
+                999,
+                143,
+                605,
+                18
+              ],
+              [
+                1773,
+                131,
+                1543,
+                190
+              ],
+              [
+                50,
+                13,
+                124,
+                49
+              ]
+            ]
+          }
+        }
+      },
+      "uncertainty": {
+        "method": "validation_binary_residual_band",
+        "nominal_coverage": 0.9,
+        "radius": 0.7729127501681025,
+        "interpretation": "Predictive event-error band, not a confidence interval for true probability"
+      },
+      "splits": {
+        "train": {
+          "rows": 53790,
+          "origin_start": "2026-07-22T00:00:00+00:00",
+          "origin_end": "2026-08-25T00:00:00+00:00",
+          "label_known_end": "2026-08-25T23:00:00+00:00",
+          "unique_targets": null
+        },
+        "validation": {
+          "rows": 11022,
+          "origin_start": "2026-08-26T00:00:00+00:00",
+          "origin_end": "2026-09-02T00:00:00+00:00",
+          "label_known_end": "2026-09-02T23:00:00+00:00",
+          "unique_targets": null
+        },
+        "test": {
+          "rows": 12672,
+          "origin_start": "2026-09-03T00:00:00+00:00",
+          "origin_end": "2026-09-10T00:00:00+00:00",
+          "label_known_end": "2026-09-13T00:00:00+00:00",
+          "unique_targets": null
+        }
+      },
+      "validation_selection_end": "2026-08-29T00:00:00+00:00",
+      "calibration_origin_start": "2026-08-30T00:00:00+00:00",
+      "calibration_rows": 4686
+    }
+  },
+  "lineage": {
+    "normal_operations": {
+      "source_run_id": "0a4cee6b-7bca-4815-8c12-5b4315147e0e",
+      "source_snapshot_sha256": "ba3f06e36202001e7d2b9d3ce6bec0d6838012d0ef5da6ba840db47ffbe8e2b9",
+      "dataset_seed": 42,
+      "dataset_manifest_sha256": "c41589545081e7281b082c7b6360f8737f5e1ed11535d781488a5c449a882d9d",
+      "as_of": "2026-09-13T00:00:00Z",
+      "ports": 4,
+      "terminals": 18,
+      "berths": 44,
+      "cranes": 186,
+      "announced_scenario_overrides": [],
+      "stability_probe": {
+        "delayed_call_id": "P04-D060-N04",
+        "crane_id": "P01-T01-B1-C3",
+        "overrides": [
+          {
+            "kind": "arrival_change",
+            "call_id": "P04-D060-N04",
+            "scheduled_eta": "2026-09-13T12:00:00Z"
+          },
+          {
+            "kind": "crane_outage",
+            "crane_id": "P01-T01-B1-C3",
+            "start": "2026-09-13T02:00:00Z",
+            "end": "2026-09-13T14:00:00Z"
+          }
+        ],
+        "same_origin_counterfactual": true
+      }
+    },
+    "arrival_surge": {
+      "source_run_id": "95aea88d-4610-4c2d-88ce-a2f8d1ce0c4b",
+      "source_snapshot_sha256": "7c7991a00b99ed296430826d77e3f6638529eae83adb5f3fc1e5680fb8370de2",
+      "dataset_seed": 42,
+      "dataset_manifest_sha256": "a84ea94a56d5f5fd465d234b25f16a82097b0c3d68cd9c50efc182a1d5b769f9",
+      "as_of": "2026-09-13T00:00:00Z",
+      "ports": 4,
+      "terminals": 18,
+      "berths": 44,
+      "cranes": 186,
+      "announced_scenario_overrides": [],
+      "stability_probe": {
+        "delayed_call_id": "P04-D060-N04",
+        "crane_id": "P01-T01-B1-C3",
+        "overrides": [
+          {
+            "kind": "arrival_change",
+            "call_id": "P04-D060-N04",
+            "scheduled_eta": "2026-09-13T12:00:00Z"
+          },
+          {
+            "kind": "crane_outage",
+            "crane_id": "P01-T01-B1-C3",
+            "start": "2026-09-13T02:00:00Z",
+            "end": "2026-09-13T14:00:00Z"
+          }
+        ],
+        "same_origin_counterfactual": true
+      }
+    },
+    "storm_crane_breakdown": {
+      "source_run_id": "c253abe7-f36a-440a-b20e-49ab502f0d1e",
+      "source_snapshot_sha256": "a6ae3fd30a6d64ebbf889b638ef7923b0621f4ea300e5d8647946aca800614bd",
+      "dataset_seed": 42,
+      "dataset_manifest_sha256": "8849d19d0ca0d591caf33a724fd0133c3a0580c8cc68590432339943ab33f5c4",
+      "as_of": "2026-09-13T00:00:00Z",
+      "ports": 4,
+      "terminals": 18,
+      "berths": 44,
+      "cranes": 186,
+      "announced_scenario_overrides": [
+        {
+          "start": "2026-09-14T00:00:00Z",
+          "end": "2026-09-15T12:00:00Z",
+          "kind": "storm",
+          "port_id": "P01"
+        },
+        {
+          "start": "2026-09-13T20:00:00Z",
+          "end": "2026-09-16T12:00:00Z",
+          "kind": "crane_outage",
+          "crane_id": "P01-T01-B1-C1"
+        },
+        {
+          "start": "2026-09-13T20:00:00Z",
+          "end": "2026-09-16T12:00:00Z",
+          "kind": "crane_outage",
+          "crane_id": "P01-T01-B1-C2"
+        },
+        {
+          "start": "2026-09-13T20:00:00Z",
+          "end": "2026-09-16T12:00:00Z",
+          "kind": "crane_outage",
+          "crane_id": "P01-T01-B1-C3"
+        },
+        {
+          "start": "2026-09-13T20:00:00Z",
+          "end": "2026-09-16T12:00:00Z",
+          "kind": "crane_outage",
+          "crane_id": "P01-T01-B2-C1"
+        },
+        {
+          "start": "2026-09-13T20:00:00Z",
+          "end": "2026-09-16T12:00:00Z",
+          "kind": "crane_outage",
+          "crane_id": "P01-T01-B2-C2"
+        },
+        {
+          "start": "2026-09-13T20:00:00Z",
+          "end": "2026-09-16T12:00:00Z",
+          "kind": "crane_outage",
+          "crane_id": "P01-T01-B2-C3"
+        }
+      ],
+      "stability_probe": {
+        "delayed_call_id": "P04-D060-N04",
+        "crane_id": "P01-T01-B1-C3",
+        "overrides": [
+          {
+            "kind": "arrival_change",
+            "call_id": "P04-D060-N04",
+            "scheduled_eta": "2026-09-13T12:00:00Z"
+          },
+          {
+            "kind": "crane_outage",
+            "crane_id": "P01-T01-B1-C3",
+            "start": "2026-09-13T02:00:00Z",
+            "end": "2026-09-13T14:00:00Z"
+          }
+        ],
+        "same_origin_counterfactual": true
+      }
+    }
+  },
+  "primary_repeat": 1,
+  "repeat_interpretation": "Solver repeatability only; not independent ports or a statistical confidence interval",
+  "routing_interpretation": "Unapproved independent recommendations excluded from schedule savings and reroute counts",
+  "validation": {
+    "paired_cohorts": true,
+    "physical_constraints": true,
+    "frozen_assignments_preserved": true,
+    "source_databases_unchanged": true
+  },
+  "generated_at": "2026-09-13T17:13:51.949259+00:00",
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "matplotlib": "3.11.2"
+  }
+}
