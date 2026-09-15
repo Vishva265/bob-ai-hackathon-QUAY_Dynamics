@@ -1,0 +1,12 @@
+{
+  "berth_utilisation": 0.85,
+  "yard_occupancy": 0.9,
+  "waiting_hours": 8,
+  "crane_utilisation": 0.95,
+  "arrival_workload_ratio": 1.5,
+  "arrival_min_increase_moves": 500,
+  "arrival_window_hours": 3,
+  "maximum_uncertainty_width": 0.5,
+  "maximum_observation_age_hours": 6,
+  "enabled": ["BERTH_UTILISATION", "YARD_OCCUPANCY", "WAITING_TIME", "CRANE_UTILISATION", "ARRIVAL_SURGE", "LOW_CONFIDENCE"]
+}
