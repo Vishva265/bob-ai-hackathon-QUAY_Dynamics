@@ -1,59 +1,46 @@
-# =============================================================================
-# HACKATHON SUBMISSION METADATA
-# =============================================================================
-# Instructions:
-#   - Fill in ALL required fields (marked with # REQUIRED)
-#   - Optional fields can be left as empty strings ""
-#   - Do NOT rename this file — the evaluation pipeline reads it by name
-#   - Use double quotes around all string values
-# =============================================================================
 
 team:
-  name: ""                             # REQUIRED — e.g., "Orion Squad"
-  track: ""                            # REQUIRED — one of: AI | DevOps | Sustainability | Open
+  name: "QUAY_Dynamics"                # REQUIRED — e.g., "Orion Squad"
+  track: "AI"                          # REQUIRED — one of: AI | DevOps | Sustainability | Open
   lead:
-    name: ""                           # REQUIRED — e.g., "Alice Chen"
-    email: ""                          # REQUIRED — e.g., "alice.chen@ibm.com"
+    name: "Jay Patel"                      # REQUIRED — Team Lead name
+    email: "23dcs076@charusat.edu.in"   # REQUIRED — Team Lead email
   members:
-    - name: ""                         # REQUIRED — Team member 1
-      email: ""
-    - name: ""                         # Add more members by copying the two lines above
-      email: ""
-    - name: ""
-      email: ""
+    - name: "Vishva Valand"       # REQUIRED — Team member 1
+      email: "23dcs140@charusat.edu.in"
+    - name: "Mahi Patel" # Add more members
+      email: "23dcs081@charusat.edu.in"
+    - name: "Vasu Vaghasia" # Add more members
+      email: "23dcs138@charusat.edu.in"
 
 submission:
-  title: ""                            # REQUIRED — Project display name, e.g., "SmartOps Dashboard"
+  title: "QUAY — Container Congestion Predictor & Port Operations Optimiser"
 
-  problem_statement: >                 # REQUIRED — 1-3 sentences. What problem? Who has it?
-    Replace this text with a concise description of the real-world problem
-    your project addresses and who experiences it.
+  problem_statement: >
+    The 2021 LA/Long Beach port backlog stranded 100+ container vessels offshore, costing global supply chains over $10B. Port operators still allocate berths, cranes, and yard space across hundreds of vessels manually in spreadsheets, discovering congestion hotspots reactively after queues form when alternate routing decisions are too late.
 
-  solution_summary: >                  # REQUIRED — 1-3 sentences. What did you build?
-    Replace this text with a clear description of your solution
-    and how it addresses the problem above.
+  solution_summary: >
+    QUAY is an intelligent port operations decision-support system that predicts congestion hotspots up to 72 hours in advance, recommends alternate routing strategies, optimises joint berth and crane assignments using Google OR-Tools CP-SAT, and generates executable 72-hour shift plans with an auditable BOB Operations Copilot.
 
-  key_features:                        # REQUIRED — List 3 to 5 specific features you implemented
-    - ""                               # e.g., "Real-time pipeline anomaly detection using watsonx.ai"
-    - ""
-    - ""
-    - ""                               # optional 4th
-    - ""                               # optional 5th
+  key_features:
+    - "Predictive Congestion Forecasting: Hourly hotspot predictions over 72 hours using scikit-learn models and FIFO physical resource projections."
+    - "Joint Berth & Crane Optimisation: Google OR-Tools CP-SAT solver enforcing draft, length, crane capacity, tide clearance, and yard limits on a 15-minute grid."
+    - "Alternate Routing & What-If Engine: Conditional evaluations comparing arrival speed adjustments, terminal transfers, and alternate ports with cost/carbon trade-offs."
+    - "72-Hour Rolling Supervisor Shift Plans: Automated generation of 9 consecutive 8-hour shift plans with handovers, work orders, and exportable JSON/CSV/HTML."
+    - "BOB Operations Copilot & Live Replanning: Evidence-grounded operational reasoning with optional IBM watsonx.ai/Granite adapter and real-time SSE replanning."
 
   tech_stack:
-    languages: []                      # REQUIRED — e.g., ["Python", "TypeScript"]
-    frameworks: []                     # e.g., ["FastAPI", "React"]
-    ibm_technologies: []               # e.g., ["watsonx.ai", "IBM Bob", "IBM Cloud Functions"]
-    databases: []                      # e.g., ["PostgreSQL", "Redis"]
-    other: []                          # e.g., ["Docker", "GitHub Actions", "Slack API"]
+    languages: ["Python", "TypeScript"]
+    frameworks: ["FastAPI", "React", "Vite"]
+    ibm_technologies: ["watsonx.ai", "Granite", "IBM Bob"]
+    databases: ["SQLite", "PostgreSQL", "SQLAlchemy"]
+    other: ["Google OR-Tools", "scikit-learn", "Docker", "Leaflet", "Recharts", "Pydantic"]
 
-  what_we_are_most_proud_of: >         # Optional but recommended — guides judges to your best work
-    Replace with what aspect of the submission you consider strongest
-    and want judges to pay special attention to.
+  what_we_are_most_proud_of: >
+    The auditable end-to-end integration: instead of an opaque AI black box, QUAY pairs mathematical constraint guarantees (OR-Tools CP-SAT with independent validation) with machine learning forecasts and an evidence-grounded BOB Operations Copilot, keeping human supervisors firmly in command with 1-click approvals and transparent handover logs.
 
-  known_limitations: >                 # Optional but recommended — be honest about gaps
-    Replace with any known limitations, incomplete features,
-    or shortcuts taken due to time constraints.
+  known_limitations: >
+    The current evaluation relies on reproducible synthetic port datasets and simulation proxies for emissions and costs. Live AIS ingestion, production TOS (Terminal Operating System) bidirectional sync, and port-specific commercial agreements remain future work. Live IBM watsonx.ai connectivity requires user-supplied credentials.
 
 # =============================================================================
 # ARTIFACT LOCATIONS
