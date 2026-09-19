@@ -52,8 +52,8 @@ class DashboardService:
         if run_id:
             value=self.session.get(m.OptimisationRun,run_id)
         else:
-            value=self.session.scalar(select(m.OptimisationRun).join(m.Scenario).where(
-                m.Scenario.name.ilike('%storm%')).order_by(m.OptimisationRun.created_at.desc()).limit(1))
+            value=self.session.scalar(select(m.OptimisationRun).where(
+                m.OptimisationRun.scenario_id.is_(None)).order_by(m.OptimisationRun.created_at.desc()).limit(1))
             value=value or self.session.scalar(select(m.OptimisationRun).order_by(m.OptimisationRun.created_at.desc()).limit(1))
         if value is None:
             raise DomainError('DASHBOARD_NOT_SEEDED','Run seed_dashboard.py, or generate a forecast and optimisation first',404)
@@ -106,7 +106,8 @@ class DashboardService:
             for row in rows:
                 row['explanation']=explain_forecast(row,source.input_snapshot,inventory,warning,source.plan,bool(source.scenario_id))
                 row['explanation']['input_hash']=source.forecast.input_hash
-        notices=['Fixed-time synthetic demonstration; all timestamps UTC. LOW confidence requires operator review.',
+        historical = 'LA_LB' in source.input_snapshot.get('port_ids', []) and parse(source.as_of).year == 2021
+        notices=['2021 NOAA AIS replay; observed positions and derived calls, with calibrated resources. Future outcomes are withheld from planning.' if historical else 'Fixed-time synthetic demonstration; all timestamps UTC. LOW confidence requires operator review.',
             'Savings compare FCFS and optimised planning proxies, not realised invoices or measured emissions.',
             'Routing proposals are independent, unreserved and require fresh inputs and operator approval.']
         if not rows:
@@ -121,7 +122,7 @@ class DashboardService:
             recommendations=recommendations,routes=routes,
             alerts=[record(a) for a in self.session.scalars(select(m.CongestionAlert).where(m.CongestionAlert.last_run_id==source.forecast_run_id)
                 .order_by(m.CongestionAlert.expected_start,m.CongestionAlert.id))],notices=notices,
-            scenario_name=source.scenario.name if source.scenario else 'Operational plan',
+            scenario_name='2021 LA/LB · NOAA AIS historical replay' if historical else source.scenario.name if source.scenario else 'Operational plan',
             effective_assignments=SupervisorPlanService(self.session).assignments(source.plan) if source.plan else [],
             risk_wait_threshold_hours=rec_run.policy['severe_wait_hours'] if rec_run else RecommendationPolicy.configured().severe_wait_hours)
 

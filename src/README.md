@@ -8,7 +8,7 @@ results; an LLM cannot invent operational figures or dispatch vessels.
 **BOB Operations Copilot:** optional IBM watsonx.ai / Granite chat integration
 explains persisted results with validated evidence. Local fallback stays available;
 the dashboard identifies the provider used for each response.
-[IBM setup and verification](docs/watsonx-integration.md) .
+[IBM setup and verification](docs/watsonx-integration.md).
 
 ## Start the five-minute demo
 

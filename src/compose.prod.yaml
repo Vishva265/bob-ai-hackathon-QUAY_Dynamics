@@ -1,0 +1,46 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      DATABASE_URL: ${DATABASE_URL:-sqlite:////workspace/artifacts/operations.db}
+      AUTO_MIGRATE: "true"
+      MODEL_DIRECTORY: ${MODEL_DIRECTORY:-/workspace/demo/seed/models}
+      EVALUATION_DIRECTORY: ${EVALUATION_DIRECTORY:-/workspace/demo/recorded}
+      DEMO_SEED_ON_START: ${DEMO_SEED_ON_START:-true}
+      DEMO_DATASET_DIRECTORY: ${DEMO_DATASET_DIRECTORY:-}
+      LIVE_DEMO_ENABLED: "true"
+      LIVE_DEMO_DIRECTORY: /workspace/artifacts/live-demo
+      OPERATOR_API_KEY: ${OPERATOR_API_KEY:-quay-operator-key-production-2026-quay}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost,http://localhost:80,http://127.0.0.1}
+      EXPENSIVE_REQUESTS_PER_MINUTE: ${EXPENSIVE_REQUESTS_PER_MINUTE:-60}
+      REQUEST_BODY_LIMIT_BYTES: ${REQUEST_BODY_LIMIT_BYTES:-10485760}
+      JOB_LEASE_SECONDS: ${JOB_LEASE_SECONDS:-900}
+      READINESS_REQUIRE_MODEL: "true"
+      READINESS_REQUIRE_DATA: "true"
+      EXPLANATION_MODE: ${EXPLANATION_MODE:-watsonx}
+      WATSONX_APIKEY: ${WATSONX_APIKEY:-YukTZOzF7nxBYNIaUrXgN22Q6NIyBe7NjYYuT1oO2y5p}
+      WATSONX_PROJECT_ID: ${WATSONX_PROJECT_ID:-f41e2554-7c4c-4dcb-826f-c9c87d1cafcb}
+      WATSONX_MODEL_ID: ${WATSONX_MODEL_ID:-ibm/granite-4-h-small}
+      WATSONX_API_VERSION: ${WATSONX_API_VERSION:-2025-10-25}
+      WATSONX_URL: ${WATSONX_URL:-https://eu-de.ml.cloud.ibm.com}
+    volumes:
+      - operations_data:/workspace/artifacts
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  operations_data:

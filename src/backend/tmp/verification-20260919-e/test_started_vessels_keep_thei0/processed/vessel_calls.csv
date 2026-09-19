@@ -1,0 +1,2 @@
+id,vessel_id,terminal_id,planning_terminal_basis,period,scheduled_eta,priority,cargo_type,onboard_teu,unload_moves,load_moves,teu_per_move,classification
+AIS-111000111-20210912T2200-1,AIS-111000111,LA_P300,seeded_destination_proxy,historical,2021-09-12T22:00:00Z,3,general,7800,1440,1200,1.6,real_identity_derived_call_calibrated_workload

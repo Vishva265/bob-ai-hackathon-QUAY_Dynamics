@@ -1,0 +1,2 @@
+call_id,mmsi,port_zone_entry,port_zone_exit,arrival,berth_start,departure,anchored_observations,waiting_hours
+AIS-111000111-20210912T2200-1,111000111,2021-09-13T02:00:00Z,2021-09-13T08:00:00Z,2021-09-12T22:00:00Z,2021-09-13T02:00:00Z,2021-09-13T08:00:00Z,1,4.0

@@ -1,0 +1,56 @@
+{
+  "classification": "CALIBRATED_NOT_REAL",
+  "seed": 42,
+  "basis": {
+    "terminal_count": "Representative terminal groups for spatial attribution, not surveyed operating units.",
+    "berths_and_cranes": "Anchored to published Port of Los Angeles terminal and infrastructure facts; simplified for the optimizer.",
+    "yard_capacity": "Deterministic planning proxy informed by published terminal acreage/storage examples.",
+    "staffing": "Three eight-hour shifts; one supervisor role per task. No historical labor roster was available.",
+    "weather_and_tide": "Neutral required model inputs, explicitly calibrated because this AIS package contains neither source. Twelve pre-cutoff tide observations prevent the optimizer from using its conservative missing-tide fallback.",
+    "carry_in_operations": "Latest pre-cutoff berth-start per proxy berth reserves its berth and two home cranes. Remaining workload is calibrated from elapsed time and handling rate; no future departure observations are used.",
+    "yard_policy": "Uses the same default safe-yard and demand-derived productivity margins as the main optimizer, rather than assuming every yard is fully saturated for all 120 hours."
+  },
+  "sources": [
+    "https://www.portoflosangeles.org/business/statistics/facts-and-figures",
+    "https://www.portoflosangeles.org/business/terminals/container/wbct-la-til",
+    "https://www.portoflosangeles.org/facilities/ter_"
+  ],
+  "resources": [
+    {
+      "id": "LA_APM",
+      "name": "APM Pier 400 proxy",
+      "lat": 33.7274,
+      "lon": -118.251,
+      "berths": 6,
+      "cranes": 19,
+      "yard_teu": 52000
+    },
+    {
+      "id": "LA_P300",
+      "name": "Pier 300 proxy",
+      "lat": 33.7388,
+      "lon": -118.269,
+      "berths": 4,
+      "cranes": 24,
+      "yard_teu": 52000
+    },
+    {
+      "id": "LA_WBCT",
+      "name": "West Basin proxy",
+      "lat": 33.7488,
+      "lon": -118.2705,
+      "berths": 2,
+      "cranes": 5,
+      "yard_teu": 24000
+    },
+    {
+      "id": "LB_CT",
+      "name": "Long Beach container-terminal proxy",
+      "lat": 33.7542,
+      "lon": -118.203,
+      "berths": 5,
+      "cranes": 20,
+      "yard_teu": 48000
+    }
+  ]
+}

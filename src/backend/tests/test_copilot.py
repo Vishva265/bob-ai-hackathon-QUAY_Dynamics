@@ -48,7 +48,7 @@ def snapshot(api):
 
 def test_tools_and_explanations_are_grounded_and_reproducible(api,run):
     tools=api.get('/copilot/tools').json()
-    assert len(tools['tools'])==6 and all(not t['writes_operational_data'] for t in tools['tools'])
+    assert len(tools['tools'])==7 and all(not t['writes_operational_data'] for t in tools['tools'])
     answer=query(api,run,'Summarise the next shift for the supervisor.')
     result=api.post('/copilot/tools/shift_plans',json={'run_id':run['id']}).json()
     assert answer['data_timestamp']==EPOCH and answer['optimisation_run_id']==run['id']
@@ -71,7 +71,9 @@ def test_tools_and_explanations_are_grounded_and_reproducible(api,run):
 
 def test_missing_data_and_ambiguous_questions_do_not_invent_results(api,run):
     assert 'No persisted' in query(api,run,'Why will Terminal 2 become congested?',port_id='P04')['direct_answer']
-    assert not query(api,run,'Which vessels are most at risk?')['supporting_figures']
+    risk=query(api,run,'Which vessels are most at risk?')
+    assert 'No trained' in risk['answer']
+    assert all(f['tool']=='optimisation_results' for f in risk['supporting_figures'])
     assert 'No audited' in query(api,run,'Why is rerouting rejected?',call_id=run['assignments'][0]['call_id'])['direct_answer']
     assert 'Select a before run' in query(api,run,'What changed after the crane breakdown?')['direct_answer']
     assert 'Select a vessel' in query(api,run,'What happens if vessel X arrives six hours late?')['direct_answer']
@@ -213,6 +215,24 @@ def test_optional_llm_cannot_add_numbers_actions_or_omit_evidence(monkeypatch):
     monkeypatch.setattr('app.copilot.provider.json_request',lambda url,body,headers:
         {'access_token':'test-token'} if 'identity/token' in url else {'choices':[{'message':{'content':'{"sentence_ids":["S1"],"evidence_ids":["E1"]}'}}]})
     assert (ask().provider,ask().status)==('watsonx','validated')
+
+
+def test_granite_repairs_one_incomplete_id_envelope_without_accepting_prose(monkeypatch):
+    monkeypatch.setenv('EXPLANATION_MODE','watsonx');monkeypatch.setenv('WATSONX_APIKEY','test-key')
+    monkeypatch.setenv('WATSONX_PROJECT_ID','test-project')
+    monkeypatch.setattr('app.copilot.provider.access_token',lambda key:'test-token')
+    replies=iter([
+        {'choices':[{'message':{'content':'{"sentence_ids":["S1"],"evidence_ids":[]}'}}]},
+        {'choices':[{'message':{'content':'{"sentence_ids":["S1"],"evidence_ids":["E1"]}'}}]},
+    ]);requests=[]
+    monkeypatch.setattr('app.copilot.provider.json_request',lambda url,body,headers:
+        (requests.append(json.loads(body)) or next(replies)))
+    evidence=[Evidence(id='E1',label='Wait',value=12,unit='hours',tool='vessel_details',
+        record_id='CALL',field='prediction',source_run_id='RUN')]
+    result=explain('vessel_risk','risk','Stored wait is 12 hours.',evidence,[],[])
+    assert (result.provider,result.status,result.answer)==('watsonx','validated','Stored wait is 12 hours.')
+    assert len(requests)==2 and set(json.loads(requests[1]['messages'][1]['content']))=={
+        'sentence_ids','evidence_ids'}
 
 
 @pytest.mark.parametrize('content',['{}','not json','{"sentence_ids":["S1"],"evidence_ids":[]}',

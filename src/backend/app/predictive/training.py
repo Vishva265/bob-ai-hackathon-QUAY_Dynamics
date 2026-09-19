@@ -9,7 +9,7 @@ import joblib
 import numpy as np
 import pandas as pd
 import sklearn
-from sklearn.ensemble import HistGradientBoostingClassifier, HistGradientBoostingRegressor
+from sklearn.ensemble import ExtraTreesClassifier, HistGradientBoostingClassifier, HistGradientBoostingRegressor
 from sklearn.linear_model import LogisticRegression, Ridge
 from sklearn.metrics import (mean_absolute_error, mean_squared_error, precision_score,
     recall_score, f1_score, roc_auc_score, confusion_matrix, brier_score_loss)
@@ -21,7 +21,8 @@ from app.predictive.datasets import build_training_rows, chronological_splits
 from app.predictive.features import FEATURES, FEATURE_VERSION, LEVELS, UNITS
 from app.predictive.estimators import RollingWaiting, RollingCongestion, probabilities
 
-TRAINING_CONFIG = dict(seed=42, iterations=120, max_leaf_nodes=15, early_stopping=False,
+TRAINING_CONFIG = dict(seed=42, iterations=350, max_leaf_nodes=63, min_samples_leaf=20,
+                       learning_rate=.06, l2_regularization=1., early_stopping=False,
                        train_fraction=.70, validation_fraction=.15, nominal_coverage=.90,
                        waiting_selection='validation_mae_plus_0.1_rmse')
 
@@ -70,12 +71,22 @@ def fit_models(waiting, congestion, progress=None):
         'waiting': {
             'rolling_average': RollingWaiting(),
             'linear': make_pipeline(StandardScaler(), Ridge(alpha=10)),
-            'hist_gradient_boosting': HistGradientBoostingRegressor(max_iter=120, max_leaf_nodes=15, min_samples_leaf=15, l2_regularization=2, early_stopping=False, random_state=42),
+            # The original shallow, 120-iteration trees underfit operational surge
+            # interactions (workload, availability, weather and lead time).  These
+            # values retain regularisation while giving boosting enough capacity to
+            # model those non-linear, time-varying effects.  Candidate selection is
+            # still performed exclusively on the pre-calibration validation window.
+            'hist_gradient_boosting': HistGradientBoostingRegressor(max_iter=TRAINING_CONFIG['iterations'], max_leaf_nodes=TRAINING_CONFIG['max_leaf_nodes'], min_samples_leaf=TRAINING_CONFIG['min_samples_leaf'], learning_rate=TRAINING_CONFIG['learning_rate'], l2_regularization=TRAINING_CONFIG['l2_regularization'], early_stopping=False, random_state=TRAINING_CONFIG['seed']),
         },
         'congestion': {
             'rolling_average': RollingCongestion(),
             'logistic': make_pipeline(StandardScaler(), LogisticRegression(C=.5, max_iter=1500, random_state=42)),
-            'hist_gradient_boosting': HistGradientBoostingClassifier(max_iter=120, max_leaf_nodes=15, min_samples_leaf=50, l2_regularization=2, early_stopping=False, random_state=42),
+            'hist_gradient_boosting': HistGradientBoostingClassifier(max_iter=TRAINING_CONFIG['iterations'], max_leaf_nodes=TRAINING_CONFIG['max_leaf_nodes'], min_samples_leaf=TRAINING_CONFIG['min_samples_leaf'], learning_rate=TRAINING_CONFIG['learning_rate'], l2_regularization=TRAINING_CONFIG['l2_regularization'], early_stopping=False, random_state=TRAINING_CONFIG['seed']),
+            # Complement boosting with a decorrelated tree ensemble.  This is a
+            # useful candidate for the mixed operational thresholds in the
+            # synthetic data and is selected only if it wins validation F1.
+            'extra_trees': ExtraTreesClassifier(n_estimators=300, max_features=.8, min_samples_leaf=12,
+                                                class_weight='balanced', n_jobs=1, random_state=TRAINING_CONFIG['seed']),
         },
     }
     reports, selected, fitted = {}, {}, {}

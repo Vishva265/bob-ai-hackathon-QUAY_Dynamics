@@ -1,0 +1,736 @@
+{
+  "model_version": "ml-v1-2346d6b6e421354a",
+  "feature_version": "asof_operational_v2",
+  "features": [
+    "lead_hours",
+    "berth_count",
+    "yard_capacity_teu",
+    "incoming_teu_24h",
+    "incoming_moves_24h",
+    "workload_capacity_ratio_24h",
+    "workload_backlog_hours_24h",
+    "mean_vessel_capacity_teu",
+    "large_vessel_fraction",
+    "feeder_fraction",
+    "panamax_fraction",
+    "mean_draft_m",
+    "max_draft_m",
+    "draft_std_m",
+    "compatible_berth_hours_24h",
+    "current_berth_utilisation",
+    "projected_berth_utilisation",
+    "queue_length",
+    "yard_occupancy_pct",
+    "dwell_proxy_hours",
+    "dwell_proxy_trend_hours",
+    "available_crane_hours_24h",
+    "rolling_crane_productivity",
+    "maintenance_flag",
+    "breakdown_flag",
+    "wind_mps",
+    "visibility_m",
+    "tide_height_m",
+    "wind_risk",
+    "visibility_risk",
+    "tide_risk_fraction",
+    "weather_age_hours",
+    "yard_age_hours",
+    "tide_missing",
+    "waiting_avg_24h",
+    "waiting_avg_7d",
+    "eta_deviation_mean_hours",
+    "eta_uncertainty_std_hours",
+    "hour_sin",
+    "hour_cos",
+    "weekday",
+    "holiday_indicator",
+    "holiday_calendar_missing",
+    "call_moves",
+    "call_teu",
+    "call_draft_m",
+    "call_capacity_teu",
+    "call_priority",
+    "call_compatible_berths",
+    "call_service_hours",
+    "historical_wait_missing",
+    "productivity_missing",
+    "arrivals_next_3h",
+    "arrivals_next_6h",
+    "arrivals_next_12h",
+    "arrivals_next_24h",
+    "rolling_level_0",
+    "rolling_level_1",
+    "rolling_level_2",
+    "rolling_level_3"
+  ],
+  "units": {
+    "lead_hours": "hours",
+    "berth_count": "berths",
+    "yard_capacity_teu": "TEU",
+    "incoming_teu_24h": "TEU",
+    "incoming_moves_24h": "moves",
+    "workload_capacity_ratio_24h": "ratio",
+    "workload_backlog_hours_24h": "hours",
+    "mean_vessel_capacity_teu": "TEU",
+    "large_vessel_fraction": "ratio",
+    "feeder_fraction": "ratio",
+    "panamax_fraction": "ratio",
+    "mean_draft_m": "m",
+    "max_draft_m": "m",
+    "draft_std_m": "m",
+    "compatible_berth_hours_24h": "berth-hours",
+    "current_berth_utilisation": "ratio",
+    "projected_berth_utilisation": "ratio",
+    "queue_length": "vessels",
+    "yard_occupancy_pct": "%",
+    "dwell_proxy_hours": "hours",
+    "dwell_proxy_trend_hours": "hours",
+    "available_crane_hours_24h": "crane-hours",
+    "rolling_crane_productivity": "moves/crane-hour",
+    "maintenance_flag": "boolean",
+    "breakdown_flag": "boolean",
+    "wind_mps": "m/s",
+    "visibility_m": "m",
+    "tide_height_m": "m",
+    "wind_risk": "boolean",
+    "visibility_risk": "boolean",
+    "tide_risk_fraction": "ratio",
+    "weather_age_hours": "hours",
+    "yard_age_hours": "hours",
+    "tide_missing": "boolean",
+    "waiting_avg_24h": "hours",
+    "waiting_avg_7d": "hours",
+    "eta_deviation_mean_hours": "hours",
+    "eta_uncertainty_std_hours": "hours",
+    "hour_sin": "ratio",
+    "hour_cos": "ratio",
+    "weekday": "0..6",
+    "holiday_indicator": "boolean",
+    "holiday_calendar_missing": "boolean",
+    "call_moves": "moves",
+    "call_teu": "TEU",
+    "call_draft_m": "m",
+    "call_capacity_teu": "TEU",
+    "call_priority": "rank 1..5",
+    "call_compatible_berths": "berths",
+    "call_service_hours": "hours",
+    "historical_wait_missing": "boolean",
+    "productivity_missing": "boolean",
+    "arrivals_next_3h": "vessels",
+    "arrivals_next_6h": "vessels",
+    "arrivals_next_12h": "vessels",
+    "arrivals_next_24h": "vessels",
+    "rolling_level_0": "probability",
+    "rolling_level_1": "probability",
+    "rolling_level_2": "probability",
+    "rolling_level_3": "probability"
+  },
+  "trained_at": "2026-09-18T20:12:50.588669+00:00",
+  "source_scenario": "unit_fixture",
+  "source_seed": 42,
+  "observation_cutoff": "2026-09-13T00:00:00Z",
+  "source_hash": "68105fe76123d043932273b90326fe9d1ba0e423d594b43dadc81a6d8f8bffde",
+  "config": {
+    "seed": 42,
+    "iterations": 120,
+    "max_leaf_nodes": 15,
+    "early_stopping": false,
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15,
+    "nominal_coverage": 0.9,
+    "waiting_selection": "validation_mae_plus_0.1_rmse"
+  },
+  "selected_models": {
+    "waiting": "linear",
+    "congestion": "hist_gradient_boosting"
+  },
+  "evaluation": {
+    "waiting": {
+      "selected": "linear",
+      "metrics": {
+        "rolling_average": {
+          "selection": {
+            "mae": 0.4781939638811729,
+            "rmse": 0.550684728623212
+          },
+          "validation": {
+            "mae": 0.5077556130745536,
+            "rmse": 0.5798627736643273
+          },
+          "test": {
+            "mae": 0.4543835497711135,
+            "rmse": 0.5333935528528744
+          }
+        },
+        "linear": {
+          "selection": {
+            "mae": 0.08045724307955476,
+            "rmse": 0.09960507121605004
+          },
+          "validation": {
+            "mae": 0.08027734570605984,
+            "rmse": 0.10056257622212579
+          },
+          "test": {
+            "mae": 0.0824452998460522,
+            "rmse": 0.10231509529489204
+          }
+        },
+        "hist_gradient_boosting": {
+          "selection": {
+            "mae": 0.08284349407111292,
+            "rmse": 0.10454740671523223
+          },
+          "validation": {
+            "mae": 0.08487223917284123,
+            "rmse": 0.105640854557851
+          },
+          "test": {
+            "mae": 0.08552339364591624,
+            "rmse": 0.10555086820596894
+          }
+        }
+      },
+      "uncertainty": {
+        "method": "validation_residual_split_conformal",
+        "nominal_coverage": 0.9,
+        "radius_hours": 0.17545014973523676,
+        "by_lead": {
+          "0": 0.2095338654717156,
+          "24": 0.17793915839424557
+        },
+        "test_coverage": 0.9377777777777778,
+        "test_mean_width_hours": 0.38601011489014164
+      },
+      "splits": {
+        "train": {
+          "rows": 1036,
+          "origin_start": "2026-06-01T00:00:00+00:00",
+          "origin_end": "2026-07-12T00:00:00+00:00",
+          "label_known_end": "2026-07-12T23:00:00+00:00",
+          "unique_targets": 1036
+        },
+        "validation": {
+          "rows": 211,
+          "origin_start": "2026-07-13T00:00:00+00:00",
+          "origin_end": "2026-07-21T00:00:00+00:00",
+          "label_known_end": "2026-07-21T23:00:00+00:00",
+          "unique_targets": 211
+        },
+        "test": {
+          "rows": 225,
+          "origin_start": "2026-07-22T00:00:00+00:00",
+          "origin_end": "2026-07-30T00:00:00+00:00",
+          "label_known_end": "2026-08-01T01:00:00+00:00",
+          "unique_targets": 225
+        }
+      },
+      "validation_selection_end": "2026-07-16T00:00:00+00:00",
+      "calibration_origin_start": "2026-07-17T00:00:00+00:00",
+      "calibration_rows": 111
+    },
+    "congestion": {
+      "selected": "hist_gradient_boosting",
+      "metrics": {
+        "rolling_average": {
+          "selection": {
+            "precision": 0.4883720930232558,
+            "recall": 1.0,
+            "f1": 0.65625,
+            "roc_auc": 0.5,
+            "confusion_matrix": [
+              [
+                0,
+                44
+              ],
+              [
+                0,
+                42
+              ]
+            ],
+            "brier_score": 0.25,
+            "positive_rate": 0.4883720930232558,
+            "level_macro_f1": 0.10550458715596331,
+            "level_confusion_matrix": [
+              [
+                23,
+                0,
+                0,
+                0
+              ],
+              [
+                21,
+                0,
+                0,
+                0
+              ],
+              [
+                21,
+                0,
+                0,
+                0
+              ],
+              [
+                21,
+                0,
+                0,
+                0
+              ]
+            ],
+            "decision_threshold": 0.5
+          },
+          "validation": {
+            "precision": 0.4834123222748815,
+            "recall": 1.0,
+            "f1": 0.6517571884984026,
+            "roc_auc": 0.5,
+            "confusion_matrix": [
+              [
+                0,
+                109
+              ],
+              [
+                0,
+                102
+              ]
+            ],
+            "brier_score": 0.25,
+            "positive_rate": 0.4834123222748815,
+            "level_macro_f1": 0.10780669144981413,
+            "level_confusion_matrix": [
+              [
+                58,
+                0,
+                0,
+                0
+              ],
+              [
+                51,
+                0,
+                0,
+                0
+              ],
+              [
+                51,
+                0,
+                0,
+                0
+              ],
+              [
+                51,
+                0,
+                0,
+                0
+              ]
+            ],
+            "decision_threshold": 0.5
+          },
+          "test": {
+            "precision": 0.48,
+            "recall": 1.0,
+            "f1": 0.6486486486486487,
+            "roc_auc": 0.5,
+            "confusion_matrix": [
+              [
+                0,
+                117
+              ],
+              [
+                0,
+                108
+              ]
+            ],
+            "brier_score": 0.25,
+            "positive_rate": 0.48,
+            "level_macro_f1": 0.109375,
+            "level_confusion_matrix": [
+              [
+                63,
+                0,
+                0,
+                0
+              ],
+              [
+                54,
+                0,
+                0,
+                0
+              ],
+              [
+                54,
+                0,
+                0,
+                0
+              ],
+              [
+                54,
+                0,
+                0,
+                0
+              ]
+            ],
+            "decision_threshold": 0.5
+          }
+        },
+        "logistic": {
+          "selection": {
+            "precision": 0.4883720930232558,
+            "recall": 1.0,
+            "f1": 0.65625,
+            "roc_auc": 0.5227272727272727,
+            "confusion_matrix": [
+              [
+                0,
+                44
+              ],
+              [
+                0,
+                42
+              ]
+            ],
+            "brier_score": 0.2580642944127061,
+            "positive_rate": 0.4883720930232558,
+            "level_macro_f1": 0.19390997513529323,
+            "level_confusion_matrix": [
+              [
+                6,
+                7,
+                7,
+                3
+              ],
+              [
+                8,
+                3,
+                5,
+                5
+              ],
+              [
+                8,
+                4,
+                5,
+                4
+              ],
+              [
+                8,
+                5,
+                5,
+                3
+              ]
+            ],
+            "decision_threshold": 0.22
+          },
+          "validation": {
+            "precision": 0.48325358851674644,
+            "recall": 0.9901960784313726,
+            "f1": 0.6495176848874598,
+            "roc_auc": 0.4952329555675481,
+            "confusion_matrix": [
+              [
+                1,
+                108
+              ],
+              [
+                1,
+                101
+              ]
+            ],
+            "brier_score": 0.26609308922434605,
+            "positive_rate": 0.4834123222748815,
+            "level_macro_f1": 0.23120625271385148,
+            "level_confusion_matrix": [
+              [
+                14,
+                15,
+                16,
+                13
+              ],
+              [
+                18,
+                8,
+                13,
+                12
+              ],
+              [
+                16,
+                10,
+                15,
+                10
+              ],
+              [
+                19,
+                10,
+                10,
+                12
+              ]
+            ],
+            "decision_threshold": 0.22
+          },
+          "test": {
+            "precision": 0.4751131221719457,
+            "recall": 0.9722222222222222,
+            "f1": 0.6382978723404256,
+            "roc_auc": 0.5311807534029757,
+            "confusion_matrix": [
+              [
+                1,
+                116
+              ],
+              [
+                3,
+                105
+              ]
+            ],
+            "brier_score": 0.2610207189051762,
+            "positive_rate": 0.48,
+            "level_macro_f1": 0.25630439437739944,
+            "level_confusion_matrix": [
+              [
+                25,
+                13,
+                13,
+                12
+              ],
+              [
+                22,
+                7,
+                19,
+                6
+              ],
+              [
+                16,
+                13,
+                15,
+                10
+              ],
+              [
+                22,
+                6,
+                13,
+                13
+              ]
+            ],
+            "decision_threshold": 0.22
+          }
+        },
+        "hist_gradient_boosting": {
+          "selection": {
+            "precision": 0.9761904761904762,
+            "recall": 0.9761904761904762,
+            "f1": 0.9761904761904762,
+            "roc_auc": 0.9978354978354979,
+            "confusion_matrix": [
+              [
+                43,
+                1
+              ],
+              [
+                1,
+                41
+              ]
+            ],
+            "brier_score": 0.02258312690546498,
+            "positive_rate": 0.4883720930232558,
+            "level_macro_f1": 0.9206637507104554,
+            "level_confusion_matrix": [
+              [
+                20,
+                2,
+                0,
+                1
+              ],
+              [
+                2,
+                19,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                21,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                19
+              ]
+            ],
+            "decision_threshold": 0.41000000000000003
+          },
+          "validation": {
+            "precision": 0.9433962264150944,
+            "recall": 0.9803921568627451,
+            "f1": 0.9615384615384616,
+            "roc_auc": 0.9969418960244649,
+            "confusion_matrix": [
+              [
+                103,
+                6
+              ],
+              [
+                2,
+                100
+              ]
+            ],
+            "brier_score": 0.027288640592751195,
+            "positive_rate": 0.4834123222748815,
+            "level_macro_f1": 0.9213139511060295,
+            "level_confusion_matrix": [
+              [
+                48,
+                5,
+                0,
+                5
+              ],
+              [
+                4,
+                47,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                51,
+                0
+              ],
+              [
+                3,
+                0,
+                0,
+                48
+              ]
+            ],
+            "decision_threshold": 0.41000000000000003
+          },
+          "test": {
+            "precision": 0.9459459459459459,
+            "recall": 0.9722222222222222,
+            "f1": 0.958904109589041,
+            "roc_auc": 0.9963596074707186,
+            "confusion_matrix": [
+              [
+                111,
+                6
+              ],
+              [
+                3,
+                105
+              ]
+            ],
+            "brier_score": 0.026409733879156048,
+            "positive_rate": 0.48,
+            "level_macro_f1": 0.9268392796466192,
+            "level_confusion_matrix": [
+              [
+                54,
+                4,
+                0,
+                5
+              ],
+              [
+                4,
+                50,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                54,
+                0
+              ],
+              [
+                4,
+                0,
+                0,
+                50
+              ]
+            ],
+            "decision_threshold": 0.41000000000000003
+          }
+        }
+      },
+      "uncertainty": {
+        "method": "validation_binary_residual_band",
+        "nominal_coverage": 0.9,
+        "radius": 0.1772249253468703,
+        "decision_threshold": 0.41000000000000003,
+        "threshold_selection": "maximum F1 on pre-calibration validation-selection window",
+        "interpretation": "Predictive event-error band, not a confidence interval for true probability"
+      },
+      "splits": {
+        "train": {
+          "rows": 1036,
+          "origin_start": "2026-06-01T00:00:00+00:00",
+          "origin_end": "2026-07-12T00:00:00+00:00",
+          "label_known_end": "2026-07-12T23:00:00+00:00",
+          "unique_targets": null
+        },
+        "validation": {
+          "rows": 211,
+          "origin_start": "2026-07-13T00:00:00+00:00",
+          "origin_end": "2026-07-21T00:00:00+00:00",
+          "label_known_end": "2026-07-21T23:00:00+00:00",
+          "unique_targets": null
+        },
+        "test": {
+          "rows": 225,
+          "origin_start": "2026-07-22T00:00:00+00:00",
+          "origin_end": "2026-07-30T00:00:00+00:00",
+          "label_known_end": "2026-08-01T01:00:00+00:00",
+          "unique_targets": null
+        }
+      },
+      "validation_selection_end": "2026-07-16T00:00:00+00:00",
+      "calibration_origin_start": "2026-07-17T00:00:00+00:00",
+      "calibration_rows": 111
+    }
+  },
+  "files": {
+    "congestion_test_predictions.csv": "f44904e22ead06296e415d8a4172e0681ab441e9c64dc04bdcaa2726b259052d",
+    "models.joblib": "a6c7b86f177ddfb8312f25a8c8331345f57c1c432e52478d36e50f2ec34e414a",
+    "waiting_test_predictions.csv": "6193b1e7ec2312bd9101ab901aedb118e5f432f56980bd1b1082953b8214836d"
+  },
+  "dependencies": {
+    "python": "3.12.4",
+    "sklearn": "1.9.1",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "joblib": "1.5.3"
+  },
+  "labels": {
+    "levels": [
+      "LOW",
+      "MEDIUM",
+      "HIGH",
+      "CRITICAL"
+    ],
+    "congestion_event": "HIGH or CRITICAL",
+    "queue_high": 2,
+    "queue_critical": 4,
+    "yard_high": 0.85,
+    "yard_critical": 0.95,
+    "utilisation_high": 0.95
+  },
+  "assumptions": [
+    "Synthetic scheduled calls published seven days ahead; no publication/change logs exist",
+    "Weather and tide use last observed values; no future truth forecasts",
+    "Ongoing breakdowns persist conservatively until observed repaired",
+    "Aggregate inventory/outflow proxy substitutes for missing individual container dwell events",
+    "No holiday calendar supplied means missing indicator, not an invented holiday",
+    "Validation residual bands have no guaranteed coverage under temporal dependence or domain shift"
+  ],
+  "quality": "synthetic_chronologically_evaluated",
+  "holidays": null,
+  "dataset_rows": {
+    "waiting": 1500,
+    "congestion": 1500
+  },
+  "score_review": {
+    "unrealistically_perfect": false,
+    "note": "Report scores without tuning labels or changing test data. Investigate simulator/features if near-perfect."
+  }
+}

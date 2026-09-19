@@ -29,7 +29,12 @@ def probabilities(model, X):
     output = np.zeros((len(X), 4))
     for i, label in enumerate(model.classes_):
         output[:, int(label)] = raw[:, i]
-    return output
+    # Some ensembles accumulate binary floating-point rounding beyond one
+    # (for example 1.0000000000000004).  Preserve their relative probabilities
+    # while returning a valid distribution for calibration metrics/inference.
+    output = np.clip(output, 0., 1.)
+    total = output.sum(axis=1, keepdims=True)
+    return np.divide(output, total, out=np.full_like(output, .25), where=total > 0)
 
 
 def positive_probability(model, X):

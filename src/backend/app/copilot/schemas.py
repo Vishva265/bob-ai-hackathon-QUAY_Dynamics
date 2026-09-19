@@ -2,8 +2,8 @@ from typing import Literal
 from pydantic import Field, field_validator
 from app.schemas import DTO, Identifier, UTC
 
-Intent = Literal['auto','forecast','vessel_risk','assignment','scenario_comparison','arrival_what_if','routing','shift_summary','plan_summary']
-ToolName = Literal['forecast_data','optimisation_results','vessel_details','recommendations','shift_plans','scenario_comparisons']
+Intent = Literal['auto','forecast','vessel_risk','assignment','scenario_comparison','arrival_what_if','routing','shift_summary','plan_summary','knowledge','operational_summary','vessel_details','baseline_comparison','historical_comparison']
+ToolName = Literal['forecast_data','optimisation_results','vessel_details','recommendations','shift_plans','scenario_comparisons','historical_comparison']
 
 
 class ToolInput(DTO):
@@ -52,6 +52,8 @@ class SuggestedAction(DTO):
 
 
 class CopilotOut(DTO):
+    knowledge_sources: list[dict] = Field(default_factory=list)
+    retrieval_method: str = 'structured operational tools + BM25/character TF-IDF'
     direct_answer: str
     supporting_figures: list[Evidence]
     data_timestamp: UTC

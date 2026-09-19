@@ -12,6 +12,28 @@ afterEach(()=>{cleanup();vi.unstubAllGlobals();vi.restoreAllMocks()});
 function mockApi(data=fixture()) {const fetcher=vi.fn(async(input:RequestInfo|URL,init?:RequestInit)=>{const url=String(input);if(url.endsWith('/review')){data.run.plan!.status='REVIEWED';data.run.plan!.revision=2;return new Response(JSON.stringify(data.run.plan))}if(url.endsWith('/approve')){data.run.plan!.status='APPROVED';data.run.plan!.revision=3;return new Response(JSON.stringify(data.run.plan))}return new Response(JSON.stringify(data))});vi.stubGlobal('fetch',fetcher);return fetcher}
 
 describe('operations command centre',()=>{
+  it('switches the historical dropdown, reloads its context, exports and returns to operations',async()=>{
+    const operational=fixture(),replay=fixture();replay.run.id='run-replay';replay.run.as_of='2021-09-13T00:00:00Z';
+    replay.inventory.routing_ports=[{id:'LA_LB',name:'Los Angeles / Long Beach',latitude:33.74,longitude:-118.23}];
+    const choices=[...operational.choices,{id:'historical-2021',name:'2021 LA/LB · Actual vs proposed',scenario:false,as_of:replay.run.as_of,plan_status:'REPLAY'}];
+    operational.choices=choices;replay.choices=choices;
+    const fetcher=vi.fn(async(input:RequestInfo|URL)=>{const url=String(input);
+      if(url.endsWith('/auth/status'))return new Response(JSON.stringify({required:false,authenticated:true}));
+      if(url.endsWith('/historical-replay'))return new Response(JSON.stringify({available:false,message:'Replay fixture',cutoff:replay.run.as_of}));
+      return new Response(JSON.stringify(url.includes('/historical/')?replay:operational));
+    });vi.stubGlobal('fetch',fetcher);render(<App/>);await screen.findByText('Scheduled test vessel');
+    await userEvent.selectOptions(screen.getByLabelText('Persisted plan or scenario'),'historical-2021');
+    await waitFor(()=>expect(window.location.search).toContain('dataset=historical'));
+    expect(fetcher.mock.calls.some(([url])=>String(url)==='/api/v1/historical/dashboard')).toBe(true);
+    await userEvent.click(screen.getByRole('button',{name:'Supervisor shift plan'}));
+    expect(await screen.findByRole('button',{name:'Mark reviewed'})).toBeDisabled();
+    expect(screen.getByRole('button',{name:/^JSON$/})).toBeEnabled();
+    expect(screen.getByRole('button',{name:/Create operational draft/})).toBeDisabled();
+    expect(await screen.findAllByRole('tab')).toHaveLength(9);
+    await userEvent.selectOptions(screen.getByLabelText('Persisted plan or scenario'),operational.run.id);
+    await waitFor(()=>expect(window.location.search).not.toContain('dataset=historical'));
+    expect(fetcher.mock.calls.some(([url])=>String(url)===`/api/v1/dashboard?run_id=${operational.run.id}`)).toBe(true);
+  });
   it('retains the requested run when authentication follows the first blocked load',async()=>{
     history.replaceState(null,'','/?run=run-requested');let authenticated=false;
     Object.defineProperty(HTMLDialogElement.prototype,'showModal',{configurable:true,value:function(this:HTMLDialogElement){this.setAttribute('open','')}});

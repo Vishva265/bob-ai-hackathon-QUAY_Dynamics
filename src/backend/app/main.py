@@ -13,6 +13,8 @@ from app.api.dashboard import router as dashboard_router
 from app.api.copilot import router as copilot_router
 from app.api.live_demo import router as live_demo_router, demo_context
 from app.api.evaluation import router as evaluation_router
+from app.api.historical_replay import router as historical_router, historical_context
+from app.api.data_lab import router as data_lab_router
 from app.services.live_demo import LiveDemoManager
 
 from app.api.health import router
@@ -67,6 +69,10 @@ def create_app(settings=None, engine=None) -> FastAPI:
     register_errors(app)
     app.include_router(security_router, prefix='/api/v1')
     app.include_router(evaluation_router, prefix='/api/v1')
+    app.include_router(historical_router, prefix='/api/v1')
+    for adapter in (dashboard_router, copilot_router, plan_router, data_lab_router, early_warning_router):
+        app.include_router(adapter, prefix='/api/v1/historical', dependencies=[Depends(historical_context)], include_in_schema=False)
+    app.include_router(data_lab_router, prefix='/api/v1')
     app.include_router(security_router, include_in_schema=False)
     app.include_router(router, prefix='/api/v1')
     app.include_router(operations_router, prefix='/api/v1')
@@ -79,7 +85,7 @@ def create_app(settings=None, engine=None) -> FastAPI:
     app.include_router(live_demo_router,prefix='/api/v1')
     # Existing APIs use the private branch through request-scoped dependencies.
     # No global engine switching, proxy forwarding or main-data mutation.
-    for adapter in (operations_router, early_warning_router, recommendation_router, plan_router, dashboard_router, copilot_router):
+    for adapter in (operations_router, early_warning_router, recommendation_router, plan_router, dashboard_router, copilot_router, data_lab_router):
         app.include_router(adapter,prefix='/api/v1/live-demo/{demo_id}',dependencies=[Depends(demo_context)],include_in_schema=False)
     # Root aliases honour the requested endpoint spellings; canonical docs use v1.
     app.include_router(router, include_in_schema=False)

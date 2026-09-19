@@ -45,3 +45,20 @@ typing_extensions==4.16.0
 tzdata==2025.2
 urllib3==2.7.0
 uvicorn==0.41.0
+
+# Optional MCP transport and its additional dependencies
+attrs==26.1.0
+cffi==2.1.1
+cryptography==50.0.1
+httpx-sse==0.4.3
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+mcp==1.28.1
+pycparser==3.0
+pydantic-settings==2.15.0
+PyJWT==2.14.0
+python-multipart==0.0.32
+pywin32==312
+referencing==0.37.0
+rpds-py==2026.6.3
+sse-starlette==3.4.11

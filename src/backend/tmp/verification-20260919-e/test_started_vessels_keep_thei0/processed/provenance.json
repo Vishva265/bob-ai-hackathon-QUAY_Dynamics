@@ -1,0 +1,54 @@
+{
+  "source": "NOAA Marine Cadastre 2021 daily AIS CSV",
+  "real_fields": [
+    "MMSI",
+    "BaseDateTime",
+    "LAT",
+    "LON",
+    "SOG",
+    "COG",
+    "Heading",
+    "VesselName",
+    "IMO",
+    "CallSign",
+    "VesselType",
+    "Status",
+    "Length",
+    "Width",
+    "Draft",
+    "Cargo",
+    "TransceiverClass"
+  ],
+  "derived_fields": [
+    "port_zone_entry",
+    "port_zone_exit",
+    "arrival",
+    "berth_start",
+    "departure",
+    "waiting_hours",
+    "hourly_vessel_count",
+    "queue_count",
+    "berth_utilization",
+    "congestion_level"
+  ],
+  "calibrated_fields": [
+    "terminal_id",
+    "berth_id",
+    "size_class",
+    "capacity_teu",
+    "max_cranes",
+    "priority",
+    "onboard_teu",
+    "unload_moves",
+    "load_moves",
+    "teu_per_move"
+  ],
+  "cutoff": "2021-09-13T00:00:00Z",
+  "evaluation_end": "2021-09-16T00:00:00Z",
+  "seed": 42,
+  "limits": [
+    "AIS cargo codes do not reliably identify container ships; berth occupancy is a spatial proxy, not terminal operating-system ground truth.",
+    "Vessel metadata uses pre-cutoff messages when available. Unknown terminal destinations use a seed-42 proxy; later observed terminals remain evaluation-only.",
+    "Only one carry-in can own a proxy berth. Additional observed started calls with unresolved berth identity are reported as not modelled, not future arrivals."
+  ]
+}

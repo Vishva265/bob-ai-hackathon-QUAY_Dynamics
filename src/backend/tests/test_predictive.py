@@ -13,6 +13,7 @@ from app.database import make_engine, migrate, session_factory
 from app.main import create_app
 from app.predictive import training
 from app.predictive.datasets import chronological_splits
+from app.predictive.estimators import probabilities
 from app.predictive.features import FeatureBuilder, FEATURES, LEVELS, level
 from app.predictive.inference import InferenceEngine
 from app.predictive.registry import ModelRegistry, ModelArtifactError, _load
@@ -118,6 +119,18 @@ def test_congestion_threshold_is_selected_without_test_labels():
     threshold=training.congestion_threshold(y,probabilities)
     assert .3<=threshold<.5
     assert training.congestion_metrics(y,probabilities,threshold)['f1']>training.congestion_metrics(y,probabilities,.5)['f1']
+
+
+def test_probability_adapter_normalises_tree_rounding_error():
+    class RoundedTree:
+        classes_ = np.array([0, 1, 2, 3])
+
+        def predict_proba(self, X):
+            return np.tile([.1, .2, .3, .4000000000000001], (len(X), 1))
+
+    result = probabilities(RoundedTree(), pd.DataFrame({'unused': [1, 2]}))
+    assert np.all((result >= 0) & (result <= 1))
+    assert np.allclose(result.sum(axis=1), 1.)
 
 
 def test_chronological_split_purges_windows_and_vessel_target_overlap():

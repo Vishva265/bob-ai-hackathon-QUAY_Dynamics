@@ -1,4 +1,5 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
+from app.api.historical_replay import dataset_choices
 from app.api.operations import DB
 from app.schemas import Identifier,OptimisationOut,ErrorResponse
 from app.services.dashboard import DashboardService,DashboardOut,DashboardScenarioInput
@@ -7,9 +8,11 @@ router=APIRouter(tags=['dashboard'],responses={c:{'model':ErrorResponse} for c i
 
 
 @router.get('/dashboard',response_model=DashboardOut)
-def dashboard(db:DB,run_id:Identifier|None=None,include_explanations:bool=False,
+def dashboard(db:DB,request:Request,run_id:Identifier|None=None,include_explanations:bool=False,
     include_berths:bool=False):
-    return DashboardService(db).output(run_id, include_explanations, include_berths)
+    result = DashboardService(db).output(run_id, include_explanations, include_berths)
+    result['choices'] = dataset_choices(request, result['choices'])
+    return result
 
 
 @router.post('/dashboard/scenarios',response_model=OptimisationOut,status_code=201)

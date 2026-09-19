@@ -23,7 +23,7 @@ def test_dashboard_explanation_is_typed_and_does_not_change_forecast_or_plan(api
     from app.services.dashboard import DashboardService,DashboardOut
     with api.app.state.sessions() as session:
         DashboardOut.model_validate(DashboardService(session).output(run['id']))
-    value=api.get('/dashboard',params={'run_id':run['id']})
+    value=api.get('/dashboard',params={'run_id':run['id'],'include_explanations':True})
     assert value.status_code==200,value.text
     row=value.json()['forecast_rows'][0]
     assert row['average_wait_hours']==19.2 and row['congestion_probability']==.079

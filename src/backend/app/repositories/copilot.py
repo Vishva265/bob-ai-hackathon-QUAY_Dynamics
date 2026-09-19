@@ -1,5 +1,6 @@
-"""Six allowlisted read tools. Free-form source text is excluded from tool data."""
+"""Allowlisted read tools. Free-form source text is excluded from tool data."""
 import copy
+import json
 import math
 import re
 from datetime import datetime, timedelta, timezone
@@ -15,7 +16,7 @@ from app.optimisation.inputs import enrich_inputs
 from app.optimisation.engine import schedule
 from app.synthetic.simulator import parse, stamp
 
-METRICS=('average_wait_hours','maximum_wait_hours','berth_utilisation','crane_utilisation',
+METRICS=('average_wait_hours','maximum_wait_hours','berth_utilisation','crane_utilisation','fixed_vessels',
          'deferred_vessels','served_vessels','delayed_vessels','estimated_cost_usd',
          'estimated_emissions_tonnes_co2','demand_average_wait_proxy_hours','validation_passed')
 
@@ -44,12 +45,29 @@ class CopilotTools:
 
     def source(self,run_id=None):
         run=self.session.get(m.OptimisationRun,run_id) if run_id else self.session.scalar(
-            select(m.OptimisationRun).join(m.Scenario).where(m.Scenario.name.ilike('%storm%'))
+            select(m.OptimisationRun).where(m.OptimisationRun.scenario_id.is_(None))
             .order_by(m.OptimisationRun.created_at.desc()).limit(1))
         if not run and not run_id:
             run=self.session.scalar(select(m.OptimisationRun).order_by(m.OptimisationRun.created_at.desc()).limit(1))
         if not run:raise DomainError('COPILOT_DATA_NOT_FOUND','Select a persisted optimisation run; seed the dashboard first.',404)
         return run
+
+    def historical_comparison(self,p):
+        run,_,_=self.inventory(p)
+        from app.api.historical_replay import ARTIFACTS
+        path=ARTIFACTS/'evaluation.json'
+        plan_path=ARTIFACTS/'plan.json'
+        if not path.is_file() or not plan_path.is_file():return dict(available=False)
+        try:
+            report=json.loads(path.read_text(encoding='utf-8'))
+            plan=json.loads(plan_path.read_text(encoding='utf-8'))
+            if report.get('source_run_id')!=run.id or plan.get('run_id')!=run.id or path.stat().st_mtime_ns<plan_path.stat().st_mtime_ns:
+                return dict(available=False)
+            keys=('known_calls','proposed_calls','deferred_calls','unknown_future_calls','excluded_known_calls','known_actual_window_wait_hours','known_proposed_window_wait_hours')
+            summary={k:report['comparison_summary'][k] for k in keys}
+            if not all(isinstance(v,(float,int)) and math.isfinite(v) and v>=0 for v in summary.values()):return dict(available=False)
+            return dict(available=True,run_id=run.id,summary=summary)
+        except (OSError,ValueError,KeyError,TypeError):return dict(available=False)
 
     def inventory(self,p):
         run=self.source(p.run_id);data=apply_overrides(run.input_snapshot)
@@ -180,6 +198,6 @@ class CopilotTools:
             before_override_count=len(before.input_snapshot.get('overrides',[])),after_override_count=len(run.input_snapshot.get('overrides',[])))
 
     def retrieve(self,name,p):
-        registry={k:getattr(self,k) for k in ('forecast_data','optimisation_results','vessel_details','recommendations','shift_plans','scenario_comparisons')}
-        if name not in registry:raise DomainError('COPILOT_TOOL_NOT_ALLOWED','Only six read-only tools are available.',404)
+        registry={k:getattr(self,k) for k in ('forecast_data','optimisation_results','vessel_details','recommendations','shift_plans','scenario_comparisons','historical_comparison')}
+        if name not in registry:raise DomainError('COPILOT_TOOL_NOT_ALLOWED','Only registered read-only tools are available.',404)
         return registry[name](p)

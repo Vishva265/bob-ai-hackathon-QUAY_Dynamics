@@ -1,13 +1,15 @@
 FROM python:3.12-slim
 WORKDIR /workspace/backend
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
-COPY requirements.txt requirements-lock.txt ./
+COPY backend/requirements.txt backend/requirements-lock.txt ./
 RUN pip install --no-cache-dir -r requirements.txt -c requirements-lock.txt
-COPY app ./app
-COPY migrations ./migrations
-COPY alembic.ini ./alembic.ini
-COPY scripts ./scripts
-COPY config ./config
+COPY backend/app ./app
+COPY backend/migrations ./migrations
+COPY backend/alembic.ini ./alembic.ini
+COPY backend/scripts ./scripts
+COPY backend/config ./config
+COPY docs /workspace/docs
+COPY demo /workspace/demo
 RUN useradd --create-home --uid 10001 portops && mkdir -p /workspace/artifacts && chown -R portops:portops /workspace/artifacts
 USER portops
 EXPOSE 8000

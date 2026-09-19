@@ -1,7 +1,9 @@
 export const API_BASE = (import.meta.env.VITE_API_BASE_URL || '/api/v1').replace(/\/$/,'');
 let demoContext:string|null=null;
+let historicalContext=false;
+export function setHistoricalContext(active:boolean){historicalContext=active}
 export function setDemoContext(id:string|null){demoContext=id}
-export function scopedApiBase(){return API_BASE+(demoContext?`/live-demo/${encodeURIComponent(demoContext)}`:'')}
+export function scopedApiBase(){return API_BASE+(historicalContext?'/historical':demoContext?`/live-demo/${encodeURIComponent(demoContext)}`:'')}
 export class ApiError extends Error {constructor(message:string,public status:number){super(message)}}
 export async function request<T>(path:string,body?:unknown,signal?:AbortSignal):Promise<T> {
   const response=await fetch(scopedApiBase()+path,{credentials:'include',signal,method:body===undefined?'GET':'POST',headers:body===undefined?{}:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)});

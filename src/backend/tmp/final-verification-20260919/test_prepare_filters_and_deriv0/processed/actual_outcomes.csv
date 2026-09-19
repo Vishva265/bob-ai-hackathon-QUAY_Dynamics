@@ -1,0 +1,2 @@
+call_id,actual_arrival,berth_start,departure,waiting_hours,terminal_id,source
+AIS-111000111-20210912T2200-1,2021-09-12T22:00:00Z,2021-09-13T02:00:00Z,2021-09-13T08:00:00Z,4.0,LA_APM,derived_from_noaa_ais

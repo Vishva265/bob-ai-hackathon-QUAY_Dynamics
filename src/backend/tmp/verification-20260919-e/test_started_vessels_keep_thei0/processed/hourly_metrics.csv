@@ -1,0 +1,4 @@
+timestamp,hourly_vessel_count,queue_count,berthed_vessel_count,occupied_berth_proxies,berth_utilization,congestion_level,source
+2021-09-12T22:00:00Z,1,1,0,0,0.0,MEDIUM,derived_from_noaa_ais
+2021-09-13T02:00:00Z,1,0,1,1,0.058824,LOW,derived_from_noaa_ais
+2021-09-13T08:00:00Z,1,0,0,0,0.0,LOW,derived_from_noaa_ais

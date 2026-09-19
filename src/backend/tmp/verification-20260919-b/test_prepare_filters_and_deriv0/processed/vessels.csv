@@ -1,0 +1,2 @@
+id,mmsi,imo,call_sign,name,size_class,length_m,width_m,draft_m,capacity_teu,required_equipment,max_cranes,field_classification
+AIS-111000111,111000111,IMO0000001,TEST1,TEST CARGO,ultra_large,300.0,42.0,12.0,12000,super_post_panamax_sts,4,mixed_real_and_calibrated

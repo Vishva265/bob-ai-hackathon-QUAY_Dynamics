@@ -1,0 +1,166 @@
+{
+  "dictionary_sha256": "37aef186ea90c5cc78b0d23aca6445f6e77a233d28fd42e1cb82e5bb49373ff9",
+  "epoch": "2026-09-13T00:00:00Z",
+  "files": {
+    "berth_cargo_compatibility.csv": {
+      "bytes": 3747,
+      "rows": 98,
+      "sha256": "b2d5de694726000252d24eaf2d29d7cdff1ab4230d18210ea577cbe3ab9002c9",
+      "table": "berth_cargo_compatibility"
+    },
+    "berths.csv": {
+      "bytes": 2298,
+      "rows": 44,
+      "sha256": "bed2289d9a7da1afec5a02820f8532015f36743a6487c9afa273c2298cb69684",
+      "table": "berths"
+    },
+    "call_outcomes.csv": {
+      "bytes": 12117,
+      "rows": 72,
+      "sha256": "d74586d00b79f656bfdf7a11ea6dc06015d89e9adcfa02bdaa79ea1bc155106f",
+      "table": "call_outcomes"
+    },
+    "crane_assignments.csv": {
+      "bytes": 18444,
+      "rows": 186,
+      "sha256": "9a280f98380294b9807c6edba1dc36d7f530841a661f85c8463668030187e4c0",
+      "table": "crane_assignments"
+    },
+    "crane_availability.csv": {
+      "bytes": 47140,
+      "rows": 609,
+      "sha256": "df3141c7509c20a7703b7d5a2e321d08f9a4c8eca25ac82e110d32bf3fa09220",
+      "table": "crane_availability"
+    },
+    "cranes.csv": {
+      "bytes": 11359,
+      "rows": 186,
+      "sha256": "0f7deb8d02112deb8eb04df247c52846fec84649d3e8613abe28ac9c682c3e16",
+      "table": "cranes"
+    },
+    "disruptions.csv": {
+      "bytes": 7105,
+      "rows": 76,
+      "sha256": "431f195d4d9cb8f32690268d1424fd48b6ca7def0c2961f84064b3043f819820",
+      "table": "disruptions"
+    },
+    "handling_log.csv": {
+      "bytes": 256596,
+      "rows": 1485,
+      "sha256": "2fdf92a9bde3cf4294b2a04daf754ee91631983b92c206affb721c901ddc982d",
+      "table": "handling_log"
+    },
+    "historical/call_outcomes.csv": {
+      "bytes": 3766,
+      "rows": 23,
+      "sha256": "6b3a0e991b00adf341e27f0f10d1e22283d9ff94a83e43bb896ffd4259747235",
+      "table": "call_outcomes"
+    },
+    "historical/vessel_calls.csv": {
+      "bytes": 5401,
+      "rows": 48,
+      "sha256": "7198538d24a0d5ee2f3823e37804744fe7342bd2fdaa2588ffa8675ad5738d23",
+      "table": "vessel_calls"
+    },
+    "historical/weather.csv": {
+      "bytes": 19390,
+      "rows": 192,
+      "sha256": "ce956d1829c634db20aff2bb6aa68739fa33e3d33086864f6d3c6a45c50e500d",
+      "table": "weather"
+    },
+    "ports.csv": {
+      "bytes": 214,
+      "rows": 4,
+      "sha256": "72b20414c45a61edd1b112b82ee2022ede1e435101bc299e0eb77615a8ce4706",
+      "table": "ports"
+    },
+    "simulated_future/call_outcomes.csv": {
+      "bytes": 8476,
+      "rows": 49,
+      "sha256": "853d4d49778563b731791e4278e3301d4899085e6dd5faa931eaf0d43ef805a4",
+      "table": "call_outcomes"
+    },
+    "simulated_future/weather.csv": {
+      "bytes": 28268,
+      "rows": 280,
+      "sha256": "f3ee4213d3e6c77a5e770d984ef632f3c863b1f780907979400038b5796683ec",
+      "table": "weather"
+    },
+    "terminals.csv": {
+      "bytes": 1250,
+      "rows": 18,
+      "sha256": "510660aa408d3daf4a5d700b953a073d7e3ab166953bba1eef80c4adada4a2d4",
+      "table": "terminals"
+    },
+    "tides.csv": {
+      "bytes": 28113,
+      "rows": 472,
+      "sha256": "57b7d29c6621f2ad70875ee26ad788c11b1321ebfe25323ed88d3a5868f90426",
+      "table": "tides"
+    },
+    "upcoming/vessel_calls.csv": {
+      "bytes": 2706,
+      "rows": 24,
+      "sha256": "dd778a734de46c274540b613c15ae292d463a98dc45c2d6917d71eb28d25a769",
+      "table": "vessel_calls"
+    },
+    "vessel_calls.csv": {
+      "bytes": 7992,
+      "rows": 72,
+      "sha256": "0ad89f1846daacb1f1767e1986a495b976be1573522bcb0dcbbf7b058a2f6d7d",
+      "table": "vessel_calls"
+    },
+    "vessels.csv": {
+      "bytes": 7166,
+      "rows": 72,
+      "sha256": "605fbcad7d59e3049637f203c775c143d158518db067aee26a03a37922f5eec2",
+      "table": "vessels"
+    },
+    "weather.csv": {
+      "bytes": 47591,
+      "rows": 472,
+      "sha256": "75833b5b9a1edc300e7c20785aaf789d5fba3bfb3624194a88ff2b068fd57f7c",
+      "table": "weather"
+    },
+    "yard_snapshots.csv": {
+      "bytes": 232272,
+      "rows": 2124,
+      "sha256": "2c2088ce583b7a61e53b198a64161d0dc85351bff5901ad0db456befa1cdf3fd",
+      "table": "yard_snapshots"
+    }
+  },
+  "generator_version": "2.0.0",
+  "history_days": 2,
+  "history_start": "2026-09-11T00:00:00Z",
+  "row_counts": {
+    "berth_cargo_compatibility": 98,
+    "berths": 44,
+    "call_outcomes": 72,
+    "crane_assignments": 186,
+    "crane_availability": 609,
+    "cranes": 186,
+    "disruptions": 76,
+    "handling_log": 1485,
+    "ports": 4,
+    "terminals": 18,
+    "tides": 472,
+    "vessel_calls": 72,
+    "vessels": 72,
+    "weather": 472,
+    "yard_snapshots": 2124
+  },
+  "scenario": "normal_operations",
+  "scenario_name": "Normal Operations",
+  "schedule_end": "2026-09-14T00:00:00Z",
+  "seed": 42,
+  "simulation_end": "2026-09-15T22:00:00Z",
+  "synthetic": true,
+  "tick_minutes": 60,
+  "upcoming_days": 1,
+  "validation": {
+    "checks": 136683,
+    "errors": 0,
+    "rows": 5990,
+    "valid": true
+  }
+}

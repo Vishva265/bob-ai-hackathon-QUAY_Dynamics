@@ -1,0 +1,4 @@
+call_id,actual_arrival,berth_start,departure,waiting_hours,terminal_id
+served,2021-09-12T14:00:00Z,2021-09-13T04:00:00Z,,14,LA_APM
+deferred,2021-09-12T19:00:00Z,,,,LA_APM
+future,2021-09-13T03:00:00Z,,,,LA_APM
