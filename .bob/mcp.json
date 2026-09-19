@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "quay-operations": {
+      "command": "python",
+      "args": ["src/backend/scripts/start_mcp.py"],
+      "env": {
+        "QUAY_API_URL": "http://127.0.0.1:8000/api/v1",
+        "QUAY_OPERATOR_KEY": "quay-local-demo-only-operator-key-2026"
+      },
+      "disabled": false,
+      "alwaysAllow": []
+    }
+  }
+}
